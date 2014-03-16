@@ -9,5 +9,6 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     emTest=new EmotionTest(this);
+    setCentralWidget(emTest);
 }
 
