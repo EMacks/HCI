@@ -6,6 +6,9 @@
 //*****************************************************************************
 #include "mainwindow.h"
 #include <QApplication>
+#include <sql.h>
+#include <sqltypes.h>
+#include <sqlext.h>
 
 int main(int argc, char *argv[])
 {
