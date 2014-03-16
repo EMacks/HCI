@@ -11,6 +11,7 @@
 #include <QList>
 #include <QRadioButton>
 #include <QGridLayout>
+#include <QPushButton>
 #include "emotionrank.h"
 
 class EmotionTest : public QWidget
@@ -21,6 +22,7 @@ public:
     EmotionTest(QWidget *p=0);
 private:
     QList<EmotionRank*> emotions;
+    QPushButton *submit;
 };
 
 #endif
