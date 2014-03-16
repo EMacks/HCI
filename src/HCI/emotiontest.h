@@ -14,6 +14,11 @@
 #include <QPushButton>
 #include "emotionrank.h"
 
+const QString emo[] = {"Happy", "Sad", "Angry", "Frustrated", "Relaxed",
+		       "Focused", "Overwhelmed", "Confident", "Hesitant",
+		       "Stressed", "Excited", "Distracted", "Bored", "Tired",
+		       "Nervous"};
+
 class EmotionTest : public QWidget
 {
    Q_OBJECT
