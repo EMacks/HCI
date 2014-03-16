@@ -32,4 +32,5 @@ agree EmotionRank::findChecked() {
 	       return (agree)i;
 	 }
    }
+   return (agree)Nothing;
 }

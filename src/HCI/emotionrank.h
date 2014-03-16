@@ -11,8 +11,8 @@
 #include <QGridLayout>
 #include <QRadioButton>
 
-enum agree {StronglyAgree, Agree, Neutral, Disagree, StronglyDisagree};
-const QString mapping[] = {"Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"}; 
+enum agree {StronglyAgree, Agree, Neutral, Disagree, StronglyDisagree, Nothing};
+const QString mapping[] = {"Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree", "Nothing"}; 
 
 class EmotionRank: public QWidget{
     Q_OBJECT
