@@ -6,7 +6,7 @@
 //*****************************************************************************
 #include "emotionrank.h"
 
-EmotionRank::EmotionRank(QString em,QWidget *p){
+EmotionRank::EmotionRank(QString em,QWidget *p) : QWidget(p) {
    QGridLayout *layout = new QGridLayout();
    QLabel *label=new QLabel(em);
    layout->addWidget(label);

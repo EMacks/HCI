@@ -6,7 +6,7 @@
 //*****************************************************************************
 #include "emotiontest.h"
 
-EmotionTest::EmotionTest(QWidget *p){
+EmotionTest::EmotionTest(QWidget *p) : QWidget(p) {
    QGridLayout *layout=new QGridLayout();
    emotions.append(new EmotionRank("Happy"));
    emotions.append(new EmotionRank("Sad"));
