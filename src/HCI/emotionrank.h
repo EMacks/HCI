@@ -11,14 +11,17 @@
 #include <QGridLayout>
 #include <QRadioButton>
 
+enum agree {StronglyAgree, Agree, Neutral, Disagree, StronglyDisagree};
+const QString mapping[] = {"Strongly Agree", "Agree", "Neutral", "Disagree", "Strongly Disagree"}; 
+
 class EmotionRank: public QWidget{
     Q_OBJECT
 
 public:
     EmotionRank(QString em="", QWidget *p=0);
-private:
+    agree findChecked();
+  private:
     QList<QRadioButton*> radios;
-
 };
 
 #endif

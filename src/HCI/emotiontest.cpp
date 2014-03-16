@@ -6,6 +6,8 @@
 //*****************************************************************************
 #include "emotiontest.h"
 
+typedef QList<EmotionRank*>::iterator iterER;
+
 EmotionTest::EmotionTest(QWidget *p) : QWidget(p) {
    QGridLayout *layout=new QGridLayout();
    submit = new QPushButton("Submit", this);
@@ -24,10 +26,17 @@ EmotionTest::EmotionTest(QWidget *p) : QWidget(p) {
    emotions.append(new EmotionRank("Bored", this));
    emotions.append(new EmotionRank("Tired", this));
    emotions.append(new EmotionRank("Nervous", this));
-   
-   for(int i=0;i<emotions.length();i++){
-      layout->addWidget(emotions.at(i),i,0,1,1);
+   int i =0;
+   for(iterER it= emotions.begin(); it != emotions.end();i++, ++it){
+      layout->addWidget(*it,i,0,1,1);
    }
+   connect(submit, SIGNAL(clicked()), this, SLOT(findChecked()));  
    layout->addWidget(submit, emotions.length(), 0, 1, 1);
    setLayout(layout);
+}
+
+void EmotionTest::findChecked() {
+   for(iterER it = emotions.begin(); it != emotions.end(); ++it) {
+      agree ans = (*it)->findChecked();
+   }
 }

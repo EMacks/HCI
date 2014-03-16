@@ -16,13 +16,17 @@
 
 class EmotionTest : public QWidget
 {
-    Q_OBJECT
-
+   Q_OBJECT
+      
 public:
-    EmotionTest(QWidget *p=0);
+   EmotionTest(QWidget *p=0);
+public slots:
+   void findChecked();
+   
 private:
-    QList<EmotionRank*> emotions;
-    QPushButton *submit;
+   QList<EmotionRank*> emotions;
+   QPushButton *submit;
+   
 };
 
 #endif

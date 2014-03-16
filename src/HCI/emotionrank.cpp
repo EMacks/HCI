@@ -6,18 +6,30 @@
 //*****************************************************************************
 #include "emotionrank.h"
 
+typedef QList<QRadioButton*>::iterator iterR;
+
+
 EmotionRank::EmotionRank(QString em,QWidget *p) : QWidget(p) {
    QGridLayout *layout = new QGridLayout();
    QLabel *label=new QLabel(em);
    layout->addWidget(label);
    
-   radios.append(new QRadioButton("Strongly Agree",this));
-   radios.append(new QRadioButton("Agree",this));
-   radios.append(new QRadioButton("Neutral",this));
-   radios.append(new QRadioButton("Disagree",this));
-   radios.append(new QRadioButton("Strongly Disagree",this));
-   for(int i=0;i<radios.length();i++){
-      layout->addWidget(radios.at(i),0,i+1,1,1);
+   for(int i = 0; i < 5; i++) {
+      radios.append(new QRadioButton(mapping[i],this));
+   }
+   int i=0;
+   for(iterR it = radios.begin(); it != radios.end(); ++it, ++i){
+      layout->addWidget(*it,0,i+1,1,1);
    }
    setLayout(layout);
+}
+
+agree EmotionRank::findChecked() {
+   for(iterR it = radios.begin(); it != radios.end(); ++it) {
+      if((*it)->isChecked())
+	 for(int i = 0; i < 5; i++) {
+	    if(mapping[i] == (*it)->text())
+	       return (agree)i;
+	 }
+   }
 }
