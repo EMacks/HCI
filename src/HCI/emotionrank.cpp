@@ -1,3 +1,9 @@
+//*****************************************************************************
+// CPSC 3770 Human Computer Interaction
+// Prof: Kevin Grant
+// by: Erin Mackey and Camara Lerner
+// implementation file for EmotionRank
+//*****************************************************************************
 #include "emotionrank.h"
 
 EmotionRank::EmotionRank(QString em,QWidget *p){

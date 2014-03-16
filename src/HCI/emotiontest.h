@@ -1,3 +1,9 @@
+//*****************************************************************************
+// CPSC 3770 Human Computer Interaction
+// Prof: Kevin Grant
+// by: Erin Mackey and Camara Lerner
+// header file for EmotionTest
+//*****************************************************************************
 #ifndef EMOTIONTEST_H
 #define EMOTIONTEST_H
 

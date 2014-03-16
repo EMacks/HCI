@@ -1,3 +1,9 @@
+//*****************************************************************************
+// CPSC 3770 Human Computer Interaction
+// Prof: Kevin Grant
+// by: Erin Mackey and Camara Lerner
+// header file for EmotionRank
+//*****************************************************************************
 #ifndef EMOTIONRANK_H
 #define EMOTIONRANK_H
 #include <QWidget>
