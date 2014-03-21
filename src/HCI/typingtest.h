@@ -8,12 +8,17 @@
 #define TYPINGTEST_H
 
 #include <QWidget>
+#include "typing.h"
+
+class QLabel;
 
 class TypingTest : QWidget {
    Q_OBJECT
    public:
-   TypingTest(QWidget * parent);
-   private:
+   TypingTest(QWidget *parent=0);
+  private:
+   QLabel *explain;
+   QLabel *text;
    Typing *write;
 
 };
