@@ -12,7 +12,7 @@
 
 class QLabel;
 
-class TypingTest : QWidget {
+class TypingTest : public QWidget {
    Q_OBJECT
    public:
    TypingTest(QWidget *parent=0);

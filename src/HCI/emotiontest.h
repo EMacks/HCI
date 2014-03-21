@@ -8,6 +8,7 @@
 #define EMOTIONTEST_H
 
 #include <QWidget>
+#include <QDialog>
 #include <QList>
 #include <QRadioButton>
 #include <QGridLayout>
@@ -19,7 +20,7 @@ const QString emo[] = {"Happy", "Sad", "Angry", "Frustrated", "Relaxed",
 		       "Stressed", "Excited", "Distracted", "Bored", "Tired",
 		       "Nervous"};
 
-class EmotionTest : public QWidget
+class EmotionTest : public QDialog
 {
    Q_OBJECT
       

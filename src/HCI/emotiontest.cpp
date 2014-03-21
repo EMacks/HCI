@@ -9,7 +9,7 @@
 
 typedef QList<EmotionRank*>::iterator iterER;
 
-EmotionTest::EmotionTest(QWidget *p) : QWidget(p) {
+EmotionTest::EmotionTest(QWidget *p) : QDialog(p) {
    QGridLayout *layout=new QGridLayout();
    submit = new QPushButton("Submit", this);
    for(int i = 0; i < 15; i++) {
@@ -21,6 +21,8 @@ EmotionTest::EmotionTest(QWidget *p) : QWidget(p) {
       layout->addWidget(*it,i,0,1,1);
    }
    connect(submit, SIGNAL(clicked()), this, SLOT(findChecked()));  
+   connect(submit, SIGNAL(clicked()), this, SLOT(close()));
+
    layout->addWidget(submit, emotions.length(), 0, 1, 1);
    setLayout(layout);
 }

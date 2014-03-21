@@ -12,7 +12,7 @@
 
 class QKeyEvent;
 
-class Typing : QLineEdit {
+class Typing : public QLineEdit {
    Q_OBJECT
   public:
    Typing(QWidget * parent=0);

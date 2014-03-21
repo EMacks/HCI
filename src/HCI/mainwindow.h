@@ -9,6 +9,7 @@
 
 #include <QMainWindow>
 #include "emotiontest.h"
+#include "typingtest.h"
 
 class MainWindow : public QMainWindow
 {
@@ -18,6 +19,7 @@ public:
     MainWindow(QWidget *parent = 0);
 private:
     EmotionTest *emTest;
+    TypingTest *tyTest;
 };
 
 #endif // MAINWINDOW_H
