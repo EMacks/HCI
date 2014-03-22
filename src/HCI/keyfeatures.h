@@ -1,3 +1,9 @@
+//*****************************************************************************
+// CPSC 3770 Human Computer Interaction
+// Prof: Kevin Grant
+// by: Erin Mackey and Camara Lerner
+// header file for KeyFeatures
+//*****************************************************************************
 #ifndef KEYFEATURES_H
 #define KEYFEATURES_H
 
@@ -30,6 +36,7 @@ class KeyFeatures {
    const Features& access_3G_NumEvents() { return triG_NumEvents;}
   private:
    void calculate();
+   int calcNumMistakes();
    Features calcFeatures(QVector<int> a);
    void calc_2G_1D2D();
    void calc_2G_1Dur();
@@ -47,6 +54,7 @@ class KeyFeatures {
    void calc_3G_Dur();
    void calc_3G_NumEvents();
    
+   int numMistakes;
    Features diG_1D2D, diG_1Dur, diG_KeyLat, diG_2Dur, diG_Dur,
       diG_NumEvents, triG_1D2D, triG_1Dur, triG_1KeyLat, triG_2D3D, triG_2Dur,
       triG_2KeyLat, triG_3Dur, triG_Dur, triG_NumEvents;

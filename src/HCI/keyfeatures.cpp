@@ -1,7 +1,20 @@
+//*****************************************************************************
+// CPSC 3770 Human Computer Interaction
+// Prof: Kevin Grant
+// by: Erin Mackey and Camara Lerner
+// Implementation file for KeyFeatures
+//*****************************************************************************
+
+// you are currently looking at page 35
+
 #include "keyfeatures.h"
 #include <cmath>
 #include <cstdlib>
 #include <algorithm>
+
+bool goodKey(const int& a) {
+  return Qt::Key_Apostrophe >= a && a >= Qt::Key_Z;
+}
 
 KeyFeatures::KeyFeatures(QVector<int>& k, QVector<int>& p,
 			 QVector<int>& r) {
@@ -94,64 +107,117 @@ void KeyFeatures::calculate()
    triG_NumEvents = calcFeatures(*vtriG_NumEvents);
    delete vtriG_NumEvents;
 
+   numMistakes = calcNumMistakes();
+
 }
 
-void KeyFeatures::calc_2G_1D2D() {
+int KeyFeatures::calcNumMistakes() {
+  int count = 0;
+  for(int i = 0; i < key.size(); i++) {
+    if(key[i] == Qt::Key_Delete || key[i] == Qt::Key_Backspace)
+      count++;
+  }
+  return count;
+}
+// Qt::Key_Apostrophe >= here >= Qt::Key_Z
 
+void KeyFeatures::calc_2G_1D2D() {
+  for(int i = 0; i < key.size() - 1; i++) {
+    if(goodKey(key[i]) && goodKey(key[i + 1]))
+      (*vdiG_1D2D).push_back(press[i + 1] - press[i]);
+  }
 }
 
 void KeyFeatures::calc_2G_1Dur() {
-
+  for(int i = 0; i < key.size() - 1; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]))
+      (*vdiG_1Dur).push_back(release[i] - press[i]);
+  }
 }
 
 void KeyFeatures::calc_2G_KeyLat() {
-
+  for(int i = 0; i < key.size() - 1; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]))
+      (*vdiG_KeyLat).push_back(press[i+1] - release[i]);
+  }
 }
 
 void KeyFeatures::calc_2G_2Dur() {
-
+ for(int i = 0; i < key.size() - 1; i++) {
+   if(goodKey(key[i]) && goodKey(key[i+1]))
+      (*vdiG_2Dur).push_back(release[i + 1] - press[i + 1]);
+  }
 }
 
 void KeyFeatures::calc_2G_Dur() {
-
+  for(int i = 0; i < key.size() - 1; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]))
+      (*vdiG_Dur).push_back(release[i + 1] - press[i]);
+  }
 }
 
 void KeyFeatures::calc_2G_NumEvents() {
-
+  // NOT A CLUE WHAT EVENTS ARE
+  //????????????????????????????????????????????????????????????????????????????
 }
 
 void KeyFeatures::calc_3G_1D2D() {
-
+  for(int i = 0; i < key.size() - 2; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+      (*vtriG_1D2D).push_back(press[i + 1] - press[i]);
+  }
 }
 
 void KeyFeatures::calc_3G_1Dur() {
-
+  for(int i = 0; i < key.size() - 2; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+      (*vtriG_1Dur).push_back(release[i] - press[i]);
+  }
 }
 
 void KeyFeatures::calc_3G_1KeyLat() {
-
+for(int i = 0; i < key.size() - 2; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+      (*vtriG_1KeyLat).push_back(press[i + 1] - release[i]);
+  }
 }
 
 void KeyFeatures::calc_3G_2D3D() {
-
+  for(int i = 0; i < key.size() - 2; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+      (*vtriG_2D3D).push_back(press[i + 1] - press[i]);
+  }
 }
 
 void KeyFeatures::calc_3G_2Dur() {
-
+  for(int i = 0; i < key.size() - 2; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+      (*vtriG_2Dur).push_back(release[i + 1] - press[i + 1]);
+  }
 }
 
 void KeyFeatures::calc_3G_2KeyLat() {
-
+  for(int i = 0; i < key.size() - 2; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+      (*vtriG_2KeyLat).push_back(press[i + 2] - release[i+1]);
+  }
 }
 
 void KeyFeatures::calc_3G_3Dur() {
-
+  for(int i = 0; i < key.size() - 2; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+      (*vtriG_3Dur).push_back(release[i + 2] - press[i + 2]);
+  }
 }
 
 void KeyFeatures::calc_3G_Dur() {
-
+  for(int i = 0; i < key.size() - 2; i++) {
+    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+      (*vtriG_Dur).push_back(release[i + 2] - press[i]);
+  }
 }
 
 void KeyFeatures::calc_3G_NumEvents() {
-
+  // STILL NOT SURE WHAT EVENTS ARE
+  //????????????????????????????????????????????????????????????????????????????
 }
