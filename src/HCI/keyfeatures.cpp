@@ -12,10 +12,6 @@
 #include <cstdlib>
 #include <algorithm>
 
-bool goodKey(const int& a) {
-  return Qt::Key_Apostrophe >= a && a >= Qt::Key_Z;
-}
-
 KeyFeatures::KeyFeatures(QVector<int>& k, QVector<int>& p,
 			 QVector<int>& r) {
    key = k;
@@ -123,101 +119,118 @@ int KeyFeatures::calcNumMistakes() {
 
 void KeyFeatures::calc_2G_1D2D() {
   for(int i = 0; i < key.size() - 1; i++) {
-    if(goodKey(key[i]) && goodKey(key[i + 1]))
       (*vdiG_1D2D).push_back(press[i + 1] - press[i]);
   }
 }
 
 void KeyFeatures::calc_2G_1Dur() {
-  for(int i = 0; i < key.size() - 1; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]))
+   for(int i = 0; i < key.size() - 1; i++) {
       (*vdiG_1Dur).push_back(release[i] - press[i]);
-  }
+   }
 }
 
 void KeyFeatures::calc_2G_KeyLat() {
-  for(int i = 0; i < key.size() - 1; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]))
-      (*vdiG_KeyLat).push_back(press[i+1] - release[i]);
+   for(int i = 0; i < key.size() - 1; i++) {
+     (*vdiG_KeyLat).push_back(press[i+1] - release[i]);
   }
 }
 
 void KeyFeatures::calc_2G_2Dur() {
  for(int i = 0; i < key.size() - 1; i++) {
-   if(goodKey(key[i]) && goodKey(key[i+1]))
-      (*vdiG_2Dur).push_back(release[i + 1] - press[i + 1]);
+    (*vdiG_2Dur).push_back(release[i + 1] - press[i + 1]);
   }
 }
 
 void KeyFeatures::calc_2G_Dur() {
   for(int i = 0; i < key.size() - 1; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]))
-      (*vdiG_Dur).push_back(release[i + 1] - press[i]);
+     (*vdiG_Dur).push_back(release[i + 1] - press[i]);
   }
 }
 
 void KeyFeatures::calc_2G_NumEvents() {
-  // NOT A CLUE WHAT EVENTS ARE
-  //????????????????????????????????????????????????????????????????????????????
+   QVector<int>::iterator it, it2;
+   int i = 0;
+   for(it = press.begin(), it2 = release.begin(); i < (int)key.size()-1;
+       ++i, ++it, ++it2) {
+      int count = 0;
+      int maxTime = std::max(*std::max_element(it, it+2),
+			     *std::max_element(it2, it2+2));
+      int minTime = std::min(*std::min_element(it, it+2),
+			     *std::min_element(it2, it2+2));
+      for(int j = 0; j < (int)press.size();j++) {
+	 if(press[j] <= maxTime && press[j] >= minTime)
+	    count++;
+	 if(release[j] <= maxTime && release[j] >= minTime)
+	    count++;
+      }
+      (*vdiG_NumEvents).push_back(count);
+   }
 }
 
 void KeyFeatures::calc_3G_1D2D() {
   for(int i = 0; i < key.size() - 2; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
-      (*vtriG_1D2D).push_back(press[i + 1] - press[i]);
+     (*vtriG_1D2D).push_back(press[i + 1] - press[i]);
   }
 }
 
 void KeyFeatures::calc_3G_1Dur() {
   for(int i = 0; i < key.size() - 2; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
-      (*vtriG_1Dur).push_back(release[i] - press[i]);
+     (*vtriG_1Dur).push_back(release[i] - press[i]);
   }
 }
 
 void KeyFeatures::calc_3G_1KeyLat() {
-for(int i = 0; i < key.size() - 2; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
+   for(int i = 0; i < key.size() - 2; i++) {
       (*vtriG_1KeyLat).push_back(press[i + 1] - release[i]);
-  }
+   }
 }
 
 void KeyFeatures::calc_3G_2D3D() {
   for(int i = 0; i < key.size() - 2; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
-      (*vtriG_2D3D).push_back(press[i + 1] - press[i]);
+     (*vtriG_2D3D).push_back(press[i + 1] - press[i]);
   }
 }
 
 void KeyFeatures::calc_3G_2Dur() {
   for(int i = 0; i < key.size() - 2; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
-      (*vtriG_2Dur).push_back(release[i + 1] - press[i + 1]);
+     (*vtriG_2Dur).push_back(release[i + 1] - press[i + 1]);
   }
 }
 
 void KeyFeatures::calc_3G_2KeyLat() {
   for(int i = 0; i < key.size() - 2; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
-      (*vtriG_2KeyLat).push_back(press[i + 2] - release[i+1]);
+     (*vtriG_2KeyLat).push_back(press[i + 2] - release[i+1]);
   }
 }
 
 void KeyFeatures::calc_3G_3Dur() {
   for(int i = 0; i < key.size() - 2; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
-      (*vtriG_3Dur).push_back(release[i + 2] - press[i + 2]);
+     (*vtriG_3Dur).push_back(release[i + 2] - press[i + 2]);
   }
 }
 
 void KeyFeatures::calc_3G_Dur() {
   for(int i = 0; i < key.size() - 2; i++) {
-    if(goodKey(key[i]) && goodKey(key[i+1]) && goodKey(key[i+2]))
-      (*vtriG_Dur).push_back(release[i + 2] - press[i]);
+     (*vtriG_Dur).push_back(release[i + 2] - press[i]);
   }
 }
 
 void KeyFeatures::calc_3G_NumEvents() {
-  // STILL NOT SURE WHAT EVENTS ARE
-  //????????????????????????????????????????????????????????????????????????????
+   QVector<int>::iterator it, it2;
+   int i = 0;
+   for(it = press.begin(), it2 = release.begin(); i < (int)key.size()-2;
+       ++i, ++it, ++it2) {
+      int count = 0;
+      int maxTime = std::max(*std::max_element(it, it+3),
+			     *std::max_element(it2, it2+3));
+      int minTime = std::min(*std::min_element(it, it+3),
+			     *std::min_element(it2, it2+3));
+      for(int j = 0; j < (int)press.size();j++) {
+	 if(press[j] <= maxTime && press[j] >= minTime)
+	    count++;
+	 if(release[j] <= maxTime && release[j] >= minTime)
+	    count++;
+      }
+      (*vtriG_NumEvents).push_back(count);
+   }
 }
