@@ -87,63 +87,63 @@ Features TiredAnalysis::calc(const QVector<Features> &a, const int &latest) {
 
 
 void TiredAnalysis::calc2G_1D2D(const QVector<Features> &a, const int &latest) {
-  diG_1D2D = calc(a);
+  diG_1D2D = calc(a, latest);
 }
 
 void TiredAnalysis::calc2G_1Dur(const QVector<Features> &a, const int &latest) {
-  diG_1Dur = calc(a);
+  diG_1Dur = calc(a, latest);
 }
 
 void TiredAnalysis::calc2G_KeyLat(const QVector<Features> &a, const int &latest) {
-   diG_KeyLat = calc(a);
+   diG_KeyLat = calc(a, latest);
 }
 
 void TiredAnalysis::calc2G_2Dur(const QVector<Features> &a, const int &latest) {
-   diG_2Dur = calc(a);
+   diG_2Dur = calc(a, latest);
 }
 
 void TiredAnalysis::calc2G_Dur(const QVector<Features> &a, const int &latest) {
-   diG_Dur = calc(a);
+   diG_Dur = calc(a, latest);
 }
 
 void TiredAnalysis::calc2G_NumEvents(const QVector<Features> &a, const int &latest) {
-   diG_NumEvents = calc(a);
+   diG_NumEvents = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_1D2D(const QVector<Features> &a, const int &latest) {
-   triG_1D2D = calc(a);
+   triG_1D2D = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_1Dur(const QVector<Features> &a, const int &latest) {
-  triG_1Dur = calc(a);
+  triG_1Dur = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_1KeyLat(const QVector<Features> &a, const int &latest) {
-   triG_1KeyLat = calc(a);
+   triG_1KeyLat = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_2D3D(const QVector<Features> &a, const int &latest) {
-  triG_2D3D = calc(a);
+  triG_2D3D = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_2Dur(const QVector<Features> &a, const int &latest) {
-   triG_2Dur = calc(a);
+   triG_2Dur = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_2KeyLat(const QVector<Features> &a, const int &latest) {
-   triG_2KeyLat = calc(a);
+   triG_2KeyLat = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_3Dur(const QVector<Features> &a, const int &latest) {
-   triG_3Dur = calc(a);
+   triG_3Dur = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_Dur(const QVector<Features> &a, const int &latest) {
-   triG_Dur = calc(a);
+   triG_Dur = calc(a, latest);
 }
 
 void TiredAnalysis::calc3G_NumEvents(const QVector<Features> &a, const int &latest) {
-   triG_NumEvents = calc(a);
+   triG_NumEvents = calc(a, latest);
 }
 
 // might want to also store the number of characters typed as well
