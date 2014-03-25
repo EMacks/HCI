@@ -20,6 +20,20 @@ KeyFeatures::KeyFeatures(QVector<int>& k, QVector<int>& p,
 
   calculate();
 }
+KeyFeatures::KeyFeatures(int numM, int diG_n, int triG_n, int numE,
+			 Features dG_1D2D, Features dG_1Dur, Features dG_KeyLat,
+			 Features dG_2Dur, Features dG_Dur,
+			 Features dG_NumEvents, Features trG_1D2D,
+			 Features trG_1Dur, Features trG_1KeyLat,
+			 Features trG_2D3D, Features trG_2Dur,
+			 Features trG_2KeyLat, Features trG_3Dur,
+			 Features trG_Dur, Features trG_NumEvents) :
+   numMistakes(numM), diG_num(diG_n), triG_num(triG_n), numEvents(numE),
+   diG_1D2D(dG_1D2D), diG_1Dur(dG_1Dur), diG_KeyLat(dG_KeyLat),
+   diG_2Dur(dG_2Dur), diG_Dur(dG_Dur), diG_NumEvents(dG_NumEvents),
+   triG_1D2D(trG_1D2D), triG_1Dur(trG_1Dur), triG_1KeyLat(trG_1KeyLat),
+   triG_2D3D(trG_2D3D), triG_2Dur(trG_2Dur), triG_2KeyLat(trG_2KeyLat),
+   triG_3Dur(trG_3Dur), triG_Dur(trG_Dur), triG_NumEvents(trG_NumEvents) {}
 
 Features KeyFeatures::calcFeatures(QVector<int> a) {
   Features f;
@@ -47,65 +61,65 @@ void KeyFeatures::calculate()
 {
   numEvents = press.size() + release.size();
   
-  calc_2G_1D2D();
-  diG_1D2D = calcFeatures(*vdiG_1D2D);
-  delete vdiG_1D2D;
+  QVector<int>* a = calc_2G_1D2D();
+  diG_1D2D = calcFeatures(*a);
+  delete a;
    
-  calc_2G_1Dur();
-  diG_1Dur = calcFeatures(*vdiG_1Dur);
-  delete vdiG_1Dur;
+  a = calc_2G_1Dur();
+  diG_1Dur = calcFeatures(*a);
+  delete a;
    
-  calc_2G_KeyLat();
-  diG_KeyLat = calcFeatures(*vdiG_KeyLat);
-  delete vdiG_KeyLat;
+  a = calc_2G_KeyLat();
+  diG_KeyLat = calcFeatures(*a);
+  delete a;
    
-  calc_2G_2Dur();
-  diG_2Dur = calcFeatures(*vdiG_2Dur);
-  delete vdiG_2Dur;
+  a = calc_2G_2Dur();
+  diG_2Dur = calcFeatures(*a);
+  delete a;
    
-  calc_2G_Dur();
-  diG_Dur = calcFeatures(*vdiG_Dur);
-  delete vdiG_Dur;
+  a = calc_2G_Dur();
+  diG_Dur = calcFeatures(*a);
+  delete a;
    
-  calc_2G_NumEvents();
-  diG_NumEvents = calcFeatures(*vdiG_NumEvents);
-  delete vdiG_NumEvents;
+  a = calc_2G_NumEvents();
+  diG_NumEvents = calcFeatures(*a);
+  delete a;
    
-  calc_3G_1D2D();
-  triG_1D2D = calcFeatures(*vtriG_1D2D);
-  delete vtriG_1D2D;
+  a = calc_3G_1D2D();
+  triG_1D2D = calcFeatures(*a);
+  delete a;
 
-  calc_3G_1Dur();
-  triG_1Dur= calcFeatures(*vtriG_1Dur);
-  delete vtriG_1Dur;
+  a = calc_3G_1Dur();
+  triG_1Dur= calcFeatures(*a);
+  delete a;
    
-  calc_3G_1KeyLat();
-  triG_1KeyLat = calcFeatures(*vtriG_1KeyLat);
-  delete vtriG_1KeyLat;
+  a = calc_3G_1KeyLat();
+  triG_1KeyLat = calcFeatures(*a);
+  delete a;
    
-  calc_3G_2D3D();
-  triG_2D3D = calcFeatures(*vtriG_2D3D);
-  delete vtriG_2D3D;
+  a = calc_3G_2D3D();
+  triG_2D3D = calcFeatures(*a);
+  delete a;
    
-  calc_3G_2Dur();
-  triG_2Dur = calcFeatures(*vtriG_2Dur);
-  delete vtriG_2KeyLat;
+  a = calc_3G_2Dur();
+  triG_2Dur = calcFeatures(*a);
+  delete a;
 
-  calc_3G_2KeyLat();
-  triG_2KeyLat = calcFeatures(*vtriG_2KeyLat);
-  delete vtriG_2KeyLat;
+  a = calc_3G_2KeyLat();
+  triG_2KeyLat = calcFeatures(*a);
+  delete a;
    
-  calc_3G_3Dur();
-  triG_3Dur = calcFeatures(*vtriG_3Dur);
-  delete vtriG_3Dur;
+  a = calc_3G_3Dur();
+  triG_3Dur = calcFeatures(*a);
+  delete a;
    
-  calc_3G_Dur();
-  triG_Dur = calcFeatures(*vtriG_Dur);
-  delete vtriG_Dur;
+  a = calc_3G_Dur();
+  triG_Dur = calcFeatures(*a);
+  delete a;
    
-  calc_3G_NumEvents();
-  triG_NumEvents = calcFeatures(*vtriG_NumEvents);
-  delete vtriG_NumEvents;
+  a = calc_3G_NumEvents();
+  triG_NumEvents = calcFeatures(*a);
+  delete a;
 
   numMistakes = calcNumMistakes();
 
@@ -121,38 +135,49 @@ int KeyFeatures::calcNumMistakes() {
 }
 // Qt::Key_Apostrophe >= here >= Qt::Key_Z
 
-void KeyFeatures::calc_2G_1D2D() {
-  for(int i = 0; i < key.size() - 1; i++) {
-    (*vdiG_1D2D).push_back(press[i + 1] - press[i]);
-  }
+QVector<int>* KeyFeatures::calc_2G_1D2D() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 1; i++) {
+    (*a).push_back(press[i + 1] - press[i]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_2G_1Dur() {
-  for(int i = 0; i < key.size() - 1; i++) {
-    (*vdiG_1Dur).push_back(release[i] - press[i]);
-  }
+QVector<int>* KeyFeatures::calc_2G_1Dur() {
+  QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 1; i++) {
+    (*a).push_back(release[i] - press[i]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_2G_KeyLat() {
+QVector<int>* KeyFeatures::calc_2G_KeyLat() {
+  QVector<int> *a = new QVector<int>();
   for(int i = 0; i < key.size() - 1; i++) {
-    (*vdiG_KeyLat).push_back(press[i+1] - release[i]);
+    (*a).push_back(press[i+1] - release[i]);
   }
+  return a;
 }
 
-void KeyFeatures::calc_2G_2Dur() {
+QVector<int>* KeyFeatures::calc_2G_2Dur() {
+  QVector<int> *a = new QVector<int>();
   for(int i = 0; i < key.size() - 1; i++) {
-    (*vdiG_2Dur).push_back(release[i + 1] - press[i + 1]);
+     (*a).push_back(release[i + 1] - press[i + 1]);
   }
+  return a;
 }
 
-void KeyFeatures::calc_2G_Dur() {
-  for(int i = 0; i < key.size() - 1; i++) {
-    (*vdiG_Dur).push_back(release[i + 1] - press[i]);
-  }
+QVector<int>* KeyFeatures::calc_2G_Dur() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 1; i++) {
+    (*a).push_back(release[i + 1] - press[i]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_2G_NumEvents() {
+QVector<int>* KeyFeatures::calc_2G_NumEvents() {
   QVector<int>::iterator it, it2;
+  QVector<int> *a = new QVector<int>();
   int i = 0;
   for(it = press.begin(), it2 = release.begin(); i < (int)key.size()-1;
       ++i, ++it, ++it2) {
@@ -167,74 +192,93 @@ void KeyFeatures::calc_2G_NumEvents() {
       if(release[j] <= maxTime && release[j] >= minTime)
 	count++;
     }
-    (*vdiG_NumEvents).push_back(count);
+    (*a).push_back(count);
   }
+  return a;
 }
 
-void KeyFeatures::calc_3G_1D2D() {
-  for(int i = 0; i < key.size() - 2; i++) {
-    (*vtriG_1D2D).push_back(press[i + 1] - press[i]);
-  }
+QVector<int>* KeyFeatures::calc_3G_1D2D() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 2; i++) {
+    (*a).push_back(press[i + 1] - press[i]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_3G_1Dur() {
-  for(int i = 0; i < key.size() - 2; i++) {
-    (*vtriG_1Dur).push_back(release[i] - press[i]);
-  }
+QVector<int>* KeyFeatures::calc_3G_1Dur() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 2; i++) {
+    (*a).push_back(release[i] - press[i]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_3G_1KeyLat() {
-  for(int i = 0; i < key.size() - 2; i++) {
-    (*vtriG_1KeyLat).push_back(press[i + 1] - release[i]);
-  }
+QVector<int>* KeyFeatures::calc_3G_1KeyLat() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 2; i++) {
+    (*a).push_back(press[i + 1] - release[i]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_3G_2D3D() {
-  for(int i = 0; i < key.size() - 2; i++) {
-    (*vtriG_2D3D).push_back(press[i + 1] - press[i]);
-  }
+QVector<int>* KeyFeatures::calc_3G_2D3D() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 2; i++) {
+    (*a).push_back(press[i + 1] - press[i]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_3G_2Dur() {
-  for(int i = 0; i < key.size() - 2; i++) {
-    (*vtriG_2Dur).push_back(release[i + 1] - press[i + 1]);
-  }
+QVector<int>* KeyFeatures::calc_3G_2Dur() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 2; i++) {
+    (*a).push_back(release[i + 1] - press[i + 1]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_3G_2KeyLat() {
-  for(int i = 0; i < key.size() - 2; i++) {
-    (*vtriG_2KeyLat).push_back(press[i + 2] - release[i+1]);
-  }
+QVector<int>* KeyFeatures::calc_3G_2KeyLat() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 2; i++) {
+    (*a).push_back(press[i + 2] - release[i+1]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_3G_3Dur() {
-  for(int i = 0; i < key.size() - 2; i++) {
-    (*vtriG_3Dur).push_back(release[i + 2] - press[i + 2]);
-  }
+QVector<int>* KeyFeatures::calc_3G_3Dur() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 2; i++) {
+      (*a).push_back(release[i + 2] - press[i + 2]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_3G_Dur() {
-  for(int i = 0; i < key.size() - 2; i++) {
-    (*vtriG_Dur).push_back(release[i + 2] - press[i]);
-  }
+QVector<int>* KeyFeatures::calc_3G_Dur() {
+   QVector<int> *a = new QVector<int>();
+   for(int i = 0; i < key.size() - 2; i++) {
+    (*a).push_back(release[i + 2] - press[i]);
+   }
+   return a;
 }
 
-void KeyFeatures::calc_3G_NumEvents() {
-  QVector<int>::iterator it, it2;
-  int i = 0;
-  for(it = press.begin(), it2 = release.begin(); i < (int)key.size()-2;
-      ++i, ++it, ++it2) {
-    int count = 0;
-    int maxTime = std::max(*std::max_element(it, it+3),
-			   *std::max_element(it2, it2+3));
-    int minTime = std::min(*std::min_element(it, it+3),
-			   *std::min_element(it2, it2+3));
-    for(int j = 0; j < (int)press.size();j++) {
-      if(press[j] <= maxTime && press[j] >= minTime)
-	count++;
-      if(release[j] <= maxTime && release[j] >= minTime)
-	count++;
-    }
-    (*vtriG_NumEvents).push_back(count);
-  }
+QVector<int>* KeyFeatures::calc_3G_NumEvents() {
+   QVector<int>::iterator it, it2;
+   QVector<int> *a = new QVector<int>();
+   int i = 0;
+   for(it = press.begin(), it2 = release.begin(); i < (int)key.size()-2;
+       ++i, ++it, ++it2) {
+      int count = 0;
+      int maxTime = std::max(*std::max_element(it, it+3),
+			     *std::max_element(it2, it2+3));
+      int minTime = std::min(*std::min_element(it, it+3),
+			     *std::min_element(it2, it2+3));
+      for(int j = 0; j < (int)press.size();j++) {
+	 if(press[j] <= maxTime && press[j] >= minTime)
+	    count++;
+	 if(release[j] <= maxTime && release[j] >= minTime)
+	    count++;
+      }
+      (*a).push_back(count);
+   }
+   return a;
 }
