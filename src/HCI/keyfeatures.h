@@ -12,8 +12,8 @@
 #include "features.h"
 
 struct Features{
-   qreal mean, std;
-   int min, max;
+  qreal mean, std;
+  int min, max, size;
 };
 
 class KeyFeatures {
@@ -35,7 +35,11 @@ class KeyFeatures {
    const Features& access_3G_3Dur() { return triG_3Dur;}
    const Features& access_3G_Dur() { return triG_Dur;}
    const Features& access_3G_NumEvents() { return triG_NumEvents;}
-  private:
+   const int& access_numMistakes() { return numMistakes; }
+   const int& access_2G_num() { return diG_num; }
+   const int& access_3G_num() { return triG_num; }
+   
+ private:
    void calculate();
    int calcNumMistakes();
    Features calcFeatures(QVector<int> a);
@@ -55,7 +59,7 @@ class KeyFeatures {
    void calc_3G_Dur();
    void calc_3G_NumEvents();
    
-   int numMistakes;
+   int numMistakes, diG_num, triG_num, numEvents;
    Features diG_1D2D, diG_1Dur, diG_KeyLat, diG_2Dur, diG_Dur,
       diG_NumEvents, triG_1D2D, triG_1Dur, triG_1KeyLat, triG_2D3D, triG_2Dur,
       triG_2KeyLat, triG_3Dur, triG_Dur, triG_NumEvents;
