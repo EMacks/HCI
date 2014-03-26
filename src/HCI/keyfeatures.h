@@ -67,30 +67,30 @@ class KeyFeatures {
    void set_3G_num(const int &a) { triG_num = a; }
    
  private:
-   void calculate();
-   int calcNumMistakes();
+   void calculate(QVector<int>& key, QVector<int>& press, 
+		  QVector<int>& release);
+   int calcNumMistakes(QVector<int>& key);
    Features calcFeatures(QVector<int> a);
-   QVector<int>* calc_2G_1D2D();
-   QVector<int>* calc_2G_1Dur();
-   QVector<int>* calc_2G_KeyLat();
-   QVector<int>* calc_2G_2Dur();
-   QVector<int>* calc_2G_Dur();
-   QVector<int>* calc_2G_NumEvents();
-   QVector<int>* calc_3G_1D2D();
-   QVector<int>* calc_3G_1Dur();
-   QVector<int>* calc_3G_1KeyLat();
-   QVector<int>* calc_3G_2D3D();
-   QVector<int>* calc_3G_2Dur();
-   QVector<int>* calc_3G_2KeyLat();
-   QVector<int>* calc_3G_3Dur();
-   QVector<int>* calc_3G_Dur();
-   QVector<int>* calc_3G_NumEvents();
+   QVector<int>* calc_2G_1D2D(QVector<int>& press);
+   QVector<int>* calc_2G_1Dur(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_2G_KeyLat(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_2G_2Dur(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_2G_Dur(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_2G_NumEvents(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_3G_1D2D(QVector<int>& press);
+   QVector<int>* calc_3G_1Dur(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_3G_1KeyLat(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_3G_2D3D(QVector<int>& press);
+   QVector<int>* calc_3G_2Dur(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_3G_2KeyLat(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_3G_3Dur(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_3G_Dur(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_3G_NumEvents(QVector<int>& press, QVector<int>& release);
    
    int numMistakes, diG_num, triG_num, numEvents;
    Features diG_1D2D, diG_1Dur, diG_KeyLat, diG_2Dur, diG_Dur,
       diG_NumEvents, triG_1D2D, triG_1Dur, triG_1KeyLat, triG_2D3D, triG_2Dur,
       triG_2KeyLat, triG_3Dur, triG_Dur, triG_NumEvents;
-   QVector<int> key, press, release;
 };
 
 
