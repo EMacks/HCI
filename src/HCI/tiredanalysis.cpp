@@ -2,8 +2,8 @@
 #include <climits>
 #include <cmath>
 #include <cstdlib>
-
-
+#include <fstream>
+using namespace std;
 
 TiredAnalysis::TiredAnalysis() {
    result = new KeyFeatures();
@@ -41,7 +41,7 @@ bool TiredAnalysis::isTired(const int &latest) {
 	       return false;
 	 else
 	    if((*result).access_3G_1D2D().mean <= 0.144)
-	       if(numMistakes <= 7)
+	       if((*result).access_numMistakes() <= 7)
 		  if((*result).access_2G_Dur().mean <= 0.093)
 		     return true;
 		  else
@@ -66,6 +66,12 @@ bool TiredAnalysis::isTired(const int &latest) {
 		  return false;
 }
 
+void output(ofstream& out, const Features& a) {
+   out << "min: " << a.min  << ", max: " << a.max << ", mean: "
+       << a.mean << ", std: " << a.std << ", size: " << a.size
+       << endl;
+}
+
 void TiredAnalysis::determine(const int &latest) {
 
    calc2G_1D2D(latest);
@@ -84,31 +90,65 @@ void TiredAnalysis::determine(const int &latest) {
    calc3G_Dur(latest);
    calc3G_NumEvents(latest);
    calcNumMistakes(latest);
+
+   ofstream out("tiredData.txt", ofstream::out);
+   out << "2G_1D2D: ";
+   output(out, (*result).access_2G_1D2D());
+   out << endl; 
+   out << "2G_1Dur: ";
+   output(out, (*result).access_2G_1Dur());
+   out << endl;
+   out << "2G_KeyLat: ";
+   output(out, (*result).access_2G_KeyLat());
+   out << endl;
+   out << "2G_2Dur: "; output(out, (*result).access_2G_2Dur()); out << endl;
+   out << "2G_Dur: "; output(out, (*result).access_2G_Dur()); out << endl;
+   out << "2G_1NumEvents: "; output(out, (*result).access_2G_NumEvents());
+   out << endl;
+   out << "3G_1D2D: "; output(out, (*result).access_3G_1D2D()); out <<  endl;
+   out << "3G_1Dur: "; output(out, (*result).access_3G_1Dur()); out <<  endl;
+   out << "3G_1KeyLat: "; output(out, (*result).access_3G_1KeyLat());
+   out << endl;
+   out << "3G_2D3D: "; output(out, (*result).access_3G_2D3D()); out << endl;
+   out << "3G_2Dur: "; output(out, (*result).access_3G_2Dur()); out << endl;
+   out << "3G_2KeyLat: "; output(out, (*result).access_3G_2KeyLat());
+   out << endl;
+   out << "3G_3Dur: "; output(out, (*result).access_3G_3Dur()); out << endl;
+   out << "3G_Dur: "; output(out, (*result).access_3G_Dur()); out << endl;
+   out << "3G_NumEvents: "; output(out, (*result).access_3G_NumEvents());
+   out << endl;
+   out << "Num of Mistakes: " << (*result).access_numMistakes() << endl;
+   
 }
 
 Features TiredAnalysis::calc(const QVector<Features> &a, const int &latest) {
-  Features result;
-  result.size = 0;
-  result.min = INT_MAX;
-  result.min = INT_MIN;
-  for(int i = 0; i < (int)a.size(); i++) {
-    result.size +=a[i].size;
-    result.min = std::min(result.min, a[i].min);
-    result.max = std::max(result.max, a[i].max);
-  }
-  /*  result.mean = 0;
-  result.std = 0;
-  for(int i = 0; i < (int)a.size(); i++) {
-    result.mean += a[i].size * a[i].mean;
-    result.std += a[i].std * a[i].std * a[i].size;
-  }
-  result.std = std::sqrt(result.std/result.size);
-  result.mean /= result.size;
-  */
-  //normalize for a[last]
-  result.mean = (result.max - result.min + a[latest].mean)/(qreal)result.max;
-  
-  return result;
+   Features result;
+   
+   result.size = 0;
+   result.min = a[0].min;
+   result.max = a[0].max;
+   for(int i = 0; i < (int)a.size(); i++) {
+      result.size +=a[i].size;
+      result.min = min(result.min, a[i].min);
+      result.max = max(result.max, a[i].max);
+   }
+   /*  result.mean = 0;
+       result.std = 0;
+       for(int i = 0; i < (int)a.size(); i++) {
+       result.mean += a[i].size * a[i].mean;
+       result.std += a[i].std * a[i].std * a[i].size;
+       }
+       result.std = sqrt(result.std/result.size);
+       result.mean /= result.size;
+   */
+   //normalize for a[last]
+   result.mean = (result.max - result.min + a[latest].mean*a[latest].size)/(qreal)result.max/(qreal)a[latest].size;
+   long long mX = result.max - a[latest].mean, mN = result.min - a[latest].min;
+   result.std = std::sqrt(
+      (mX*mX-mN*mN+a[latest].std*a[latest].std*a[latest].size)
+      /(qreal)mX/(qreal)mX/(qreal)a[latest].size);
+   
+   return result;
 }
 
 
@@ -128,35 +168,35 @@ void TiredAnalysis::calc2G_1Dur(const int &latest) {
 }
 
 void TiredAnalysis::calc2G_KeyLat(const int &latest) {
-  QVector<Features> a;
+   QVector<Features> a;
    for(int i = 0; i < data.size(); i++)
       a.push_back(data[i].access_2G_KeyLat());
    (*result).set_2G_KeyLat(calc(a, latest));
 }
 
 void TiredAnalysis::calc2G_2Dur(const int &latest) {
-    QVector<Features> a;
+   QVector<Features> a;
    for(int i = 0; i < data.size(); i++)
       a.push_back(data[i].access_2G_2Dur());
    (*result).set_2G_2Dur(calc(a, latest));
 }
 
 void TiredAnalysis::calc2G_Dur(const int &latest) {
-    QVector<Features> a;
+   QVector<Features> a;
    for(int i = 0; i < data.size(); i++)
       a.push_back(data[i].access_2G_Dur());
    (*result).set_2G_Dur(calc(a, latest));
 }
 
 void TiredAnalysis::calc2G_NumEvents(const int &latest) {
-    QVector<Features> a;
+   QVector<Features> a;
    for(int i = 0; i < data.size(); i++)
       a.push_back(data[i].access_2G_NumEvents());
    (*result).set_2G_NumEvents(calc(a, latest));
 }
 
 void TiredAnalysis::calc3G_1D2D(const int &latest) {
-    QVector<Features> a;
+   QVector<Features> a;
    for(int i = 0; i < data.size(); i++)
       a.push_back(data[i].access_3G_1D2D());
    (*result).set_3G_1D2D(calc(a, latest));
@@ -221,9 +261,9 @@ void TiredAnalysis::calc3G_NumEvents(const int &latest) {
 // might want to also store the number of characters typed as well
 void TiredAnalysis::calcNumMistakes(const int &latest) {
    /* numMistakes = 0.0;
-  for(int i = 0; i < a.size(); i++)
-    numMistakes += a[i];
-  numMistakes /= (qreal)a.size();
+      for(int i = 0; i < a.size(); i++)
+      numMistakes += a[i];
+      numMistakes /= (qreal)a.size();
    */
-   numMistakes = data[latest].access_numMistakes();
+   (*result).set_numMistakes(data[latest].access_numMistakes());
 }

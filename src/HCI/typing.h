@@ -21,14 +21,14 @@ class Typing : public QLineEdit {
    virtual void keyReleaseEvent(QKeyEvent * event);
 
   signals:
-   void finished(const QVector<int>&, const QVector<int>&, const QVector<int>&);
+   void finished(const QVector<long long>&, const QVector<long long>&, const QVector<long long>&);
 
   private:
    QString toMatch;
    QTime *time;
-   QVector<int> key;
-   QVector<int> press;
-   QVector<int> release;
+   QVector<long long> key;
+   QVector<long long> press;
+   QVector<long long> release;
 };
 
 #endif

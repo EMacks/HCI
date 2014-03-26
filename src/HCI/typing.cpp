@@ -20,7 +20,7 @@ void Typing::keyPressEvent(QKeyEvent * event) {
 }
 
 void Typing::keyReleaseEvent(QKeyEvent * event) {
-   int tmp = time->elapsed();
+   long long tmp = time->elapsed();
    int i;
    for(i = key.size()- 1; i >= 0; --i) {
       if(event->key() == key[i])

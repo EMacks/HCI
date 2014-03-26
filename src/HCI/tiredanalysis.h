@@ -36,8 +36,8 @@ class TiredAnalysis {
 
    int addKeyFeature(KeyFeatures a) { data.push_back(a);
       return data.size() - 1; }
-   int addKeyFeature(const QVector<int> &k, const QVector<int> &p,
-		     const QVector<int> &r) {
+   int addKeyFeature(const QVector<long long> &k, const QVector<long long> &p,
+		     const QVector<long long> &r) {
       data.push_back(KeyFeatures(k,p,r)); return data.size() - 1; }
 
   private:
