@@ -14,7 +14,8 @@ TypingTest::TypingTest(QWidget * parent) : QWidget(parent) {
 
    connect(write,SIGNAL(finished(const QVector<int>&, const QVector<int>&,
 				 const QVector<int>&)),
-	   this, SLOT()); 
+	   this, SLOT(calculate(const QVector<int>&, const QVector<int>&,
+				const QVector<int>&))); 
 
    QVBoxLayout *layout = new QVBoxLayout(this);
    layout->addWidget(explain);
@@ -25,10 +26,11 @@ TypingTest::TypingTest(QWidget * parent) : QWidget(parent) {
    
 }
 
-void calculate(const QVector<int> &key, const QVector<int> &press,
+void TypingTest::calculate(const QVector<int> &key, const QVector<int> &press,
 	       const QVector<int> &release) {
-   addKeyFeature(key, press, release);
-   if(isTried(1)) {
+   int latest = 0;
+   analysis.addKeyFeature(key, press, release);
+   if(analysis.isTired(latest)) {
       std::cerr << "you are apparently tired" << std::endl;
    } else {
       std::cerr << "apparently you are not tired" << std::endl;

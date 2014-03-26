@@ -67,25 +67,37 @@ class KeyFeatures {
    void set_3G_num(const int &a) { triG_num = a; }
    
  private:
-   void calculate(QVector<int>& key, QVector<int>& press, 
-		  QVector<int>& release);
-   int calcNumMistakes(QVector<int>& key);
+   void calculate(const QVector<int>& key, const QVector<int>& press, 
+		  const QVector<int>& release);
+   int calcNumMistakes(const QVector<int>& key);
    Features calcFeatures(QVector<int> a);
-   QVector<int>* calc_2G_1D2D(QVector<int>& press);
-   QVector<int>* calc_2G_1Dur(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_2G_KeyLat(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_2G_2Dur(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_2G_Dur(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_2G_NumEvents(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_3G_1D2D(QVector<int>& press);
-   QVector<int>* calc_3G_1Dur(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_3G_1KeyLat(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_3G_2D3D(QVector<int>& press);
-   QVector<int>* calc_3G_2Dur(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_3G_2KeyLat(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_3G_3Dur(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_3G_Dur(QVector<int>& press, QVector<int>& release);
-   QVector<int>* calc_3G_NumEvents(QVector<int>& press, QVector<int>& release);
+   QVector<int>* calc_2G_1D2D(const QVector<int>& press);
+   QVector<int>* calc_2G_1Dur(const QVector<int>& press,
+			      const QVector<int>& release);
+   QVector<int>* calc_2G_KeyLat(const QVector<int>& press,
+				const QVector<int>& release);
+   QVector<int>* calc_2G_2Dur(const QVector<int>& press,
+			      const QVector<int>& release);
+   QVector<int>* calc_2G_Dur(const QVector<int>& press,
+			     const QVector<int>& release);
+   QVector<int>* calc_2G_NumEvents(const QVector<int>& press,
+				   const QVector<int>& release);
+   QVector<int>* calc_3G_1D2D(const QVector<int>& press);
+   QVector<int>* calc_3G_1Dur(const QVector<int>& press,
+			      const QVector<int>& release);
+   QVector<int>* calc_3G_1KeyLat(const QVector<int>& press,
+				 const QVector<int>& release);
+   QVector<int>* calc_3G_2D3D(const QVector<int>& press);
+   QVector<int>* calc_3G_2Dur(const QVector<int>& press,
+			      const QVector<int>& release);
+   QVector<int>* calc_3G_2KeyLat(const QVector<int>& press,
+				 const QVector<int>& release);
+   QVector<int>* calc_3G_3Dur(const QVector<int>& press,
+			      const QVector<int>& release);
+   QVector<int>* calc_3G_Dur(const QVector<int>& press,
+			     const QVector<int>& release);
+   QVector<int>* calc_3G_NumEvents(const QVector<int>& press,
+				   const QVector<int>& release);
    
    int numMistakes, diG_num, triG_num, numEvents;
    Features diG_1D2D, diG_1Dur, diG_KeyLat, diG_2Dur, diG_Dur,

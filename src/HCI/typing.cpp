@@ -4,6 +4,10 @@
 
 Typing::Typing(QString m, QWidget * parent) : QLineEdit(parent) {
    toMatch = m;
+   for(int i = 0; i < (int)toMatch.size(); ++i) {
+      if(toMatch[i] == '\n')
+	 toMatch[i] = ' ';
+   }
    time = new QTime();
    time->start();
 }

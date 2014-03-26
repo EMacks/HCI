@@ -23,7 +23,7 @@ class TypingTest : public QWidget {
    Typing *write;
    TiredAnalysis analysis;
 
-  public slot:
+   public slots:
    void calculate(const QVector<int>&, const QVector<int>&,
 		  const QVector<int>&);
 };
