@@ -19,7 +19,8 @@ struct Features{
 class KeyFeatures {
    
   public:
-   KeyFeatures(QVector<int>& k, QVector<int>& p, QVector<int>& r);
+   KeyFeatures(const QVector<int>& k, const QVector<int>& p,
+	       const QVector<int>& r);
   KeyFeatures(int numM, int diG_n, int triG_n, int numE, Features dG_1D2D,
 	      Features dG_1Dur, Features dG_KeyLat, Features dG_2Dur,
 	      Features dG_Dur, Features dG_NumEvents, Features trG_1D2D,

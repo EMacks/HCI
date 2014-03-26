@@ -3,12 +3,15 @@
 #include <cmath>
 #include <cstdlib>
 
+
+
 TiredAnalysis::TiredAnalysis() {
    result = new KeyFeatures();
 }
 
 // make sure everything is already normalized
-bool TiredAnalysis::isTired() {
+bool TiredAnalysis::isTired(const int &latest) {
+   determine(latest);
    if((*result).access_2G_1D2D().mean <= 0.049) 
       if((*result).access_3G_1Dur().mean <= 0.037) 
 	 if((*result).access_2G_1Dur().std <=0.017) 
@@ -61,6 +64,26 @@ bool TiredAnalysis::isTired() {
 		  return true;
 	       else
 		  return false;
+}
+
+void TiredAnalysis::determine(const int &latest) {
+
+   calc2G_1D2D(latest);
+   calc2G_1Dur(latest);
+   calc2G_KeyLat(latest);
+   calc2G_2Dur(latest);
+   calc2G_Dur(latest);
+   calc2G_NumEvents(latest);
+   calc3G_1D2D(latest);
+   calc3G_1Dur(latest);
+   calc3G_1KeyLat(latest);
+   calc3G_2D3D(latest);
+   calc3G_2Dur(latest);
+   calc3G_2KeyLat(latest);
+   calc3G_3Dur(latest);
+   calc3G_Dur(latest);
+   calc3G_NumEvents(latest);
+   calcNumMistakes(latest);
 }
 
 Features TiredAnalysis::calc(const QVector<Features> &a, const int &latest) {
@@ -196,11 +219,11 @@ void TiredAnalysis::calc3G_NumEvents(const int &latest) {
 }
 
 // might want to also store the number of characters typed as well
-void TiredAnalysis::calcNumMistakes(const QVector<int> &a, const int &latest) {
+void TiredAnalysis::calcNumMistakes(const int &latest) {
    /* numMistakes = 0.0;
   for(int i = 0; i < a.size(); i++)
     numMistakes += a[i];
   numMistakes /= (qreal)a.size();
    */
-   numMistakes = a[latest];
+   numMistakes = data[latest].access_numMistakes();
 }

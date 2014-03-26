@@ -2,7 +2,8 @@
 #include <QKeyEvent>
 #include <iostream>
 
-Typing::Typing(QWidget * parent) : QLineEdit(parent) {
+Typing::Typing(QString m, QWidget * parent) : QLineEdit(parent) {
+   toMatch = m;
    time = new QTime();
    time->start();
 }
@@ -26,4 +27,6 @@ void Typing::keyReleaseEvent(QKeyEvent * event) {
       //std::cout << "released at: " << release[i] << std::endl;
    }
    QLineEdit::keyPressEvent(event);
+   if(toMatch == text())
+      emit finished(key, press, release);
 }

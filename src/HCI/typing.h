@@ -15,12 +15,16 @@ class QKeyEvent;
 class Typing : public QLineEdit {
    Q_OBJECT
   public:
-   Typing(QWidget * parent=0);
+   Typing(QString m="", QWidget * parent=0);
   protected:
    virtual void keyPressEvent(QKeyEvent * event);
    virtual void keyReleaseEvent(QKeyEvent * event);
-   
+
+  signals:
+   void finished(const QVector<int>&, const QVector<int>&, const QVector<int>&);
+
   private:
+   QString toMatch;
    QTime *time;
    QVector<int> key;
    QVector<int> press;

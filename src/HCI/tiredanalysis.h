@@ -15,7 +15,7 @@ class TiredAnalysis {
   public:
    TiredAnalysis();
 
-   bool isTired();
+   bool isTired(const int &latest);
    
    void calc2G_1D2D(const int &latest);
    void calc2G_1Dur(const int &latest);
@@ -32,14 +32,16 @@ class TiredAnalysis {
    void calc3G_3Dur(const int &latest);
    void calc3G_Dur(const int &latest);
    void calc3G_NumEvents(const int &latest);
-   void calcNumMistakes(const QVector<int> &a, const int &latest);
+   void calcNumMistakes(const int &latest);
 
    int addKeyFeature(KeyFeatures a) { data.push_back(a);
       return data.size() - 1; }
-   int addKeyFeature(QVector<int> &k, QVector<int> &p, QVector<int> &r) {
+   int addKeyFeature(const QVector<int> &k, const QVector<int> &p,
+		     const QVector<int> &r) {
       data.push_back(KeyFeatures(k,p,r)); return data.size() - 1; }
 
   private:
+   void determine(const int &latest);
    Features calc(const QVector<Features> &a, const int &latest);
    qreal numMistakes;
    QVector<KeyFeatures> data;
