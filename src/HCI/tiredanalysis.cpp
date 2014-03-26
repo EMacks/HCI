@@ -142,12 +142,17 @@ Features TiredAnalysis::calc(const QVector<Features> &a, const int &latest) {
        result.mean /= result.size;
    */
    //normalize for a[last]
-   result.mean = (result.max - result.min + a[latest].mean*a[latest].size)/(qreal)result.max/(qreal)a[latest].size;
-   long long mX = result.max - a[latest].mean, mN = result.min - a[latest].min;
-   result.std = std::sqrt(
-      (mX*mX-mN*mN+a[latest].std*a[latest].std*a[latest].size)
-      /(qreal)mX/(qreal)mX/(qreal)a[latest].size);
-   
+   result.mean = -(qreal)result.min/(result.max - result.min)
+      + a[latest].mean/(qreal)(result.max-result.min);
+
+   long long r = result.max - result.min;
+   r = r*r;
+   result.std = std::sqrt(4.0*(qreal)result.min/r
+			  + (qreal)a[latest].std * a[latest].std/r
+			  - 4.0*result.min*
+			  std::sqrt(a[latest].std*a[latest].std*a[latest].size)
+			  /r/(qreal)a[latest].size);
+			  
    return result;
 }
 
