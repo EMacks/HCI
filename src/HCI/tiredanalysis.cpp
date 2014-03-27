@@ -3,10 +3,123 @@
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
+#include <iostream>
 using namespace std;
 
 TiredAnalysis::TiredAnalysis() {
    result = new KeyFeatures();
+}
+
+int TiredAnalysis::addKeyFeature(KeyFeatures a) { 
+  data.push_back(a);
+  return data.size() - 1; 
+}
+
+int TiredAnalysis::addKeyFeature(const QVector<long long> &k,
+				 const QVector<long long> &p,
+				 const QVector<long long> &r) {
+  KeyFeatures a;
+  Features boundry;
+  boundry.min = LLONG_MAX;
+  boundry.max = LLONG_MIN;
+  a.set_2G_1D2D(boundry);
+  a.set_2G_1Dur(boundry);
+  a.set_2G_KeyLat(boundry);
+  a.set_2G_2Dur(boundry);
+  a.set_2G_Dur(boundry);
+  a.set_2G_NumEvents(boundry);
+  a.set_3G_1D2D(boundry);
+  a.set_3G_1Dur(boundry);
+  a.set_3G_1KeyLat(boundry);
+  a.set_3G_2D3D(boundry);
+  a.set_3G_2Dur(boundry);
+  a.set_3G_2KeyLat(boundry);
+  a.set_3G_3Dur(boundry);
+  a.set_3G_Dur(boundry);
+  a.set_3G_NumEvents(boundry);
+
+  for(int i = 0;i < data.size(); ++i) {
+    if(data[i].access_2G_1D2D().min < a.access_2G_1D2D().min)
+      a.set_2G_1D2D_min(data[i].access_2G_1D2D().min);
+    if(data[i].access_2G_1D2D().max > a.access_2G_1D2D().max)
+      a.set_2G_1D2D_max(data[i].access_2G_1D2D().max);
+    
+    if(data[i].access_2G_1Dur().min < a.access_2G_1Dur().min)
+      a.set_2G_1Dur_min(data[i].access_2G_1Dur().min);
+    if(data[i].access_2G_1Dur().max > a.access_2G_1Dur().max) 
+      a.set_2G_1Dur_max(data[i].access_2G_1Dur().max);
+    
+    if(data[i].access_2G_KeyLat().min < a.access_2G_KeyLat().min)
+      a.set_2G_KeyLat_min(data[i].access_2G_KeyLat().min);
+    if(data[i].access_2G_KeyLat().max > a.access_2G_KeyLat().max)
+      a.set_2G_KeyLat_max(data[i].access_2G_KeyLat().max);
+    
+    if(data[i].access_2G_2Dur().min < a.access_2G_2Dur().min)
+      a.set_2G_2Dur_min(data[i].access_2G_2Dur().min);
+    if(data[i].access_2G_2Dur().max > a.access_2G_2Dur().max)
+      a.set_2G_2Dur_max(data[i].access_2G_2Dur().max);
+    
+    if(data[i].access_2G_Dur().min < a.access_2G_Dur().min)
+      a.set_2G_Dur_min(data[i].access_2G_Dur().min);
+    if(data[i].access_2G_Dur().max > a.access_2G_Dur().max)
+      a.set_2G_Dur_max(data[i].access_2G_Dur().max);
+    
+    if(data[i].access_2G_NumEvents().min < a.access_2G_NumEvents().min)
+      a.set_2G_NumEvents_min(data[i].access_2G_NumEvents().min);
+    if(data[i].access_2G_NumEvents().max > a.access_2G_NumEvents().max)
+      a.set_2G_NumEvents_max(data[i].access_2G_NumEvents().max);
+
+    if(data[i].access_3G_1D2D().min < a.access_3G_1D2D().min)
+      a.set_3G_1D2D_min(data[i].access_3G_1D2D().min);
+    if(data[i].access_3G_1D2D().max > a.access_3G_1D2D().max)
+      a.set_3G_1D2D_max(data[i].access_3G_1D2D().max);
+
+    if(data[i].access_3G_1Dur().min < a.access_3G_1Dur().min)
+      a.set_3G_1Dur_min(data[i].access_3G_1Dur().min);
+    if(data[i].access_3G_1Dur().max > a.access_3G_1Dur().max)
+      a.set_3G_1Dur_max(data[i].access_3G_1Dur().max);
+
+    if(data[i].access_3G_1KeyLat().min < a.access_3G_1KeyLat().min)
+      a.set_3G_1KeyLat_min(data[i].access_3G_1KeyLat().min);
+    if(data[i].access_3G_1KeyLat().max > a.access_3G_1KeyLat().max)
+      a.set_3G_1KeyLat_max(data[i].access_3G_1KeyLat().max);
+
+    if(data[i].access_3G_2D3D().min < a.access_3G_2D3D().min)
+      a.set_3G_2D3D_min(data[i].access_3G_2D3D().min);
+    if(data[i].access_3G_2D3D().max > a.access_3G_2D3D().max)
+      a.set_3G_2D3D_max(data[i].access_3G_2D3D().max);
+
+    if(data[i].access_3G_2Dur().min < a.access_3G_2Dur().min)
+      a.set_3G_2Dur_min(data[i].access_3G_2Dur().min);
+    if(data[i].access_3G_2Dur().max > a.access_3G_2Dur().max)
+      a.set_3G_2Dur_max(data[i].access_3G_2Dur().max);
+    
+    if(data[i].access_3G_2KeyLat().min < a.access_3G_2KeyLat().min)
+      a.set_3G_2KeyLat_min(data[i].access_3G_2KeyLat().min);
+    if(data[i].access_3G_2KeyLat().max > a.access_3G_2KeyLat().max)
+      a.set_3G_2KeyLat_max(data[i].access_3G_2KeyLat().max);
+
+    if(data[i].access_3G_3Dur().min < a.access_3G_3Dur().min)
+      a.set_3G_3Dur_min(data[i].access_3G_3Dur().min);
+    if(data[i].access_3G_3Dur().max > a.access_3G_3Dur().max)
+      a.set_3G_3Dur_max(data[i].access_3G_3Dur().max);
+
+    if(data[i].access_3G_Dur().min < a.access_3G_Dur().min)
+      a.set_3G_Dur_min(data[i].access_3G_Dur().min);
+    if(data[i].access_3G_Dur().max > a.access_3G_Dur().max)
+      a.set_3G_Dur_max(data[i].access_3G_Dur().max);
+    
+    if(data[i].access_3G_NumEvents().min < a.access_3G_NumEvents().min)
+      a.set_3G_NumEvents_min(data[i].access_3G_NumEvents().min);
+    if(data[i].access_3G_NumEvents().max > a.access_3G_NumEvents().max)
+      a.set_3G_NumEvents_max(data[i].access_3G_NumEvents().max);
+    
+  }
+  
+  a.calculate(k,p,r);
+  data.push_back(a); 
+
+  return data.size() - 1; 
 }
 
 // make sure everything is already normalized
@@ -73,24 +186,59 @@ void output(ofstream& out, const Features& a) {
 }
 
 void TiredAnalysis::determine(const int &latest) {
+  cerr << latest << endl;
+  (*result).set_2G_1D2D(data[latest].access_2G_1D2D());
+  (*result).set_2G_1Dur(data[latest].access_2G_1Dur());
+  (*result).set_2G_KeyLat(data[latest].access_2G_KeyLat());
+  (*result).set_2G_2Dur(data[latest].access_2G_2Dur());
+  (*result).set_2G_Dur(data[latest].access_2G_Dur());
+  (*result).set_2G_NumEvents(data[latest].access_2G_NumEvents());
+  (*result).set_3G_1D2D(data[latest].access_3G_1D2D());
+  (*result).set_3G_1Dur(data[latest].access_3G_1Dur());
+  (*result).set_3G_1KeyLat(data[latest].access_3G_1KeyLat());
+  (*result).set_3G_2D3D(data[latest].access_3G_2D3D());
+  (*result).set_3G_2Dur(data[latest].access_3G_2Dur());
+  (*result).set_3G_2KeyLat(data[latest].access_3G_2KeyLat());
+  (*result).set_3G_3Dur(data[latest].access_3G_3Dur());
+  (*result).set_3G_Dur(data[latest].access_3G_Dur());
+  (*result).set_3G_NumEvents(data[latest].access_3G_NumEvents());
+  (*result).set_numMistakes(data[latest].access_numMistakes());
+    
+  /*  cerr << (*result).access_2G_1D2D().min << " " << (*result).access_2G_1D2D().max 
+       << endl;
+  
+  cerr << (*result).access_2G_1Dur().min << " "  << (*result).access_2G_1Dur().max << endl;
+  
+  cerr << (*result).access_2G_KeyLat().min << " " << (*result).access_2G_KeyLat().max << endl;
+    
+  cerr << (*result).access_2G_2Dur().min << " " <<  (*result).access_2G_2Dur().max << endl;
+    
+  cerr << (*result).access_2G_Dur().min << " " << (*result).access_2G_Dur().max << endl;
+    
+  cerr << (*result).access_2G_NumEvents().min << " " << (*result).access_2G_NumEvents().max 
+       << endl;
 
-   calc2G_1D2D(latest);
-   calc2G_1Dur(latest);
-   calc2G_KeyLat(latest);
-   calc2G_2Dur(latest);
-   calc2G_Dur(latest);
-   calc2G_NumEvents(latest);
-   calc3G_1D2D(latest);
-   calc3G_1Dur(latest);
-   calc3G_1KeyLat(latest);
-   calc3G_2D3D(latest);
-   calc3G_2Dur(latest);
-   calc3G_2KeyLat(latest);
-   calc3G_3Dur(latest);
-   calc3G_Dur(latest);
-   calc3G_NumEvents(latest);
-   calcNumMistakes(latest);
+  cerr << (*result).access_3G_1D2D().min << " " << (*result).access_3G_1D2D().max << endl;
 
+  cerr << (*result).access_3G_1Dur().min << " " << (*result).access_3G_1Dur().max << endl;
+
+  cerr << (*result).access_3G_1KeyLat().min << " " << (*result).access_3G_1KeyLat().max
+       << endl;
+
+  cerr << (*result).access_3G_2D3D().min << " " << (*result).access_3G_2D3D().max << endl;
+
+  cerr << (*result).access_3G_2Dur().min << " " << (*result).access_3G_2Dur().max << endl;
+    
+  cerr << (*result).access_3G_2KeyLat().min << " " << (*result).access_3G_2KeyLat().max
+       << endl;
+
+  cerr <<  (*result).access_3G_3Dur().min << " " << (*result).access_3G_3Dur().max << endl;
+
+  cerr << (*result).access_3G_Dur().min << " " << (*result).access_3G_Dur().max << endl;
+    
+  cerr << (*result).access_3G_NumEvents().min << " " << (*result).access_3G_NumEvents().max 
+       << endl;
+  */
    ofstream out("tiredData.txt", ofstream::out);
    out << "2G_1D2D: ";
    output(out, (*result).access_2G_1D2D());
@@ -121,154 +269,4 @@ void TiredAnalysis::determine(const int &latest) {
    
 }
 
-Features TiredAnalysis::calc(const QVector<Features> &a, const int &latest) {
-   Features result;
-   
-   result.size = 0;
-   result.min = a[0].min;
-   result.max = a[0].max;
-   for(int i = 0; i < (int)a.size(); i++) {
-      result.size +=a[i].size;
-      result.min = min(result.min, a[i].min);
-      result.max = max(result.max, a[i].max);
-   }
-   /*  result.mean = 0;
-       result.std = 0;
-       for(int i = 0; i < (int)a.size(); i++) {
-       result.mean += a[i].size * a[i].mean;
-       result.std += a[i].std * a[i].std * a[i].size;
-       }
-       result.std = sqrt(result.std/result.size);
-       result.mean /= result.size;
-   */
-   //normalize for a[last]
-   result.mean = -(qreal)result.min/(result.max - result.min)
-      + a[latest].mean/(qreal)(result.max-result.min);
 
-   long long r = result.max - result.min;
-   r = r*r;
-   result.std = std::sqrt(4.0*(qreal)result.min/r
-			  + (qreal)a[latest].std * a[latest].std/r
-			  - 4.0*result.min*
-			  std::sqrt(a[latest].std*a[latest].std*a[latest].size)
-			  /r/(qreal)a[latest].size);
-			  
-   return result;
-}
-
-
-
-void TiredAnalysis::calc2G_1D2D(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_2G_1D2D());
-   (*result).set_2G_1D2D(calc(a, latest));
-}
-
-void TiredAnalysis::calc2G_1Dur(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_2G_1Dur());
-   (*result).set_2G_1Dur(calc(a, latest));
-}
-
-void TiredAnalysis::calc2G_KeyLat(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_2G_KeyLat());
-   (*result).set_2G_KeyLat(calc(a, latest));
-}
-
-void TiredAnalysis::calc2G_2Dur(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_2G_2Dur());
-   (*result).set_2G_2Dur(calc(a, latest));
-}
-
-void TiredAnalysis::calc2G_Dur(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_2G_Dur());
-   (*result).set_2G_Dur(calc(a, latest));
-}
-
-void TiredAnalysis::calc2G_NumEvents(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_2G_NumEvents());
-   (*result).set_2G_NumEvents(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_1D2D(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_1D2D());
-   (*result).set_3G_1D2D(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_1Dur(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_1Dur());
-   (*result).set_3G_1Dur(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_1KeyLat(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_1KeyLat());
-   (*result).set_3G_1KeyLat(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_2D3D(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_2D3D());
-   (*result).set_3G_2D3D(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_2Dur(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_2Dur());
-   (*result).set_3G_2Dur(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_2KeyLat(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_2KeyLat());
-   (*result).set_3G_2KeyLat(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_3Dur(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_3Dur());
-   (*result).set_3G_3Dur(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_Dur(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_Dur());
-   (*result).set_3G_Dur(calc(a, latest));
-}
-
-void TiredAnalysis::calc3G_NumEvents(const int &latest) {
-   QVector<Features> a;
-   for(int i = 0; i < data.size(); i++)
-      a.push_back(data[i].access_3G_NumEvents());
-   (*result).set_3G_NumEvents(calc(a, latest));
-}
-
-// might want to also store the number of characters typed as well
-void TiredAnalysis::calcNumMistakes(const int &latest) {
-   /* numMistakes = 0.0;
-      for(int i = 0; i < a.size(); i++)
-      numMistakes += a[i];
-      numMistakes /= (qreal)a.size();
-   */
-   (*result).set_numMistakes(data[latest].access_numMistakes());
-}

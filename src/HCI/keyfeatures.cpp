@@ -34,32 +34,29 @@ KeyFeatures::KeyFeatures(long long numM, long long diG_n, long long triG_n,
    triG_2D3D(trG_2D3D), triG_2Dur(trG_2Dur), triG_2KeyLat(trG_2KeyLat),
    triG_3Dur(trG_3Dur), triG_Dur(trG_Dur), triG_NumEvents(trG_NumEvents) {}
 
-Features KeyFeatures::calcFeatures(QVector<long long> a) {
-  Features f;
-  f.min = a[0];
-  f.max = a[0];
+void KeyFeatures::calcFeatures(QVector<long long> a, Features & f) {
   for(int i = 0; i < a.size(); i++) {
-     if(a[i] < f.min)
-	f.min = a[i]; 
-     if(a[i] > f.max)
-	f.max = a[i];
+    if(a[i] < f.min)
+      f.min = a[i]; 
+    if(a[i] > f.max)
+      f.max = a[i];
   }
-        
+  
   // calculate mean
   f.mean = 0;
   for(int i = 0; i < (int)a.size(); ++i) {
-    f.mean += a[i];
+    f.mean += (qreal)(a[i] - f.min) / (f.max - f.min);
   }
   f.mean /= a.size();
-
+  
   // calculate standard deviation
   f.std = 0;
   for(int i = 0; i < (int)a.size(); ++i) {
-    f.std = (a[i] - f.mean) * (a[i] - f.mean);
+    f.std = ((qreal)(a[i] - f.min)/(f.max - f.min) - f.mean)
+      * ((qreal)(a[i] - f.min)/(f.max -f.min) - f.mean);
   }
   f.std = std::sqrt(f.std/a.size());
   f.size = a.size();
-  return f;
 }
 
 void KeyFeatures::calculate(const QVector<long long>& key,
@@ -69,63 +66,63 @@ void KeyFeatures::calculate(const QVector<long long>& key,
   numEvents = press.size() + release.size();
   
   QVector<long long>* a = calc_2G_1D2D(press);
-  diG_1D2D = calcFeatures(*a);
+  calcFeatures(*a, diG_1D2D);
   delete a;
    
   a = calc_2G_1Dur(press, release);
-  diG_1Dur = calcFeatures(*a);
+  calcFeatures(*a, diG_1Dur);
   delete a;
    
   a = calc_2G_KeyLat(press, release);
-  diG_KeyLat = calcFeatures(*a);
+  calcFeatures(*a, diG_KeyLat);
   delete a;
    
   a = calc_2G_2Dur(press, release);
-  diG_2Dur = calcFeatures(*a);
+  calcFeatures(*a, diG_2Dur);
   delete a;
    
   a = calc_2G_Dur(press, release);
-  diG_Dur = calcFeatures(*a);
+  calcFeatures(*a, diG_Dur);
   delete a;
    
   a = calc_2G_NumEvents(press, release);
-  diG_NumEvents = calcFeatures(*a);
+  calcFeatures(*a, diG_NumEvents);
   delete a;
    
   a = calc_3G_1D2D(press);
-  triG_1D2D = calcFeatures(*a);
+  calcFeatures(*a, triG_1D2D);
   delete a;
 
   a = calc_3G_1Dur(press, release);
-  triG_1Dur= calcFeatures(*a);
+  calcFeatures(*a, triG_1Dur);
   delete a;
    
   a = calc_3G_1KeyLat(press, release);
-  triG_1KeyLat = calcFeatures(*a);
+  calcFeatures(*a, triG_1KeyLat);
   delete a;
    
   a = calc_3G_2D3D(press);
-  triG_2D3D = calcFeatures(*a);
+  calcFeatures(*a, triG_2D3D);
   delete a;
    
   a = calc_3G_2Dur(press, release);
-  triG_2Dur = calcFeatures(*a);
+  calcFeatures(*a, triG_2Dur);
   delete a;
 
   a = calc_3G_2KeyLat(press, release);
-  triG_2KeyLat = calcFeatures(*a);
+  calcFeatures(*a, triG_2KeyLat);
   delete a;
    
   a = calc_3G_3Dur(press, release);
-  triG_3Dur = calcFeatures(*a);
+  calcFeatures(*a, triG_3Dur);
   delete a;
    
   a = calc_3G_Dur(press, release);
-  triG_Dur = calcFeatures(*a);
+  calcFeatures(*a, triG_Dur);
   delete a;
    
   a = calc_3G_NumEvents(press, release);
-  triG_NumEvents = calcFeatures(*a);
+  calcFeatures(*a, triG_NumEvents);
   delete a;
 
   numMistakes = calcNumMistakes(key);
