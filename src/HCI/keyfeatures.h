@@ -9,7 +9,6 @@
 
 #include <Qt>
 #include <QVector>
-#include "features.h"
 
 struct Features{
   qreal mean, std;
