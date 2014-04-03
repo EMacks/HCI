@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <iostream>
+#include <time.h>
 
 TypingTest::TypingTest(QWidget * parent) : QWidget(parent) {
    srand(time(NULL));
