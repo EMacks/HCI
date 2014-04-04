@@ -22,6 +22,7 @@ int TiredAnalysis::addKeyFeature(const QVector<long long> &k,
   Features boundry;
   boundry.min = LLONG_MAX;
   boundry.max = LLONG_MIN;
+  boundry.size = boundry.std = boundry.mean = 0;
   a.set_2G_1D2D(boundry);
   a.set_2G_1Dur(boundry);
   a.set_2G_KeyLat(boundry);

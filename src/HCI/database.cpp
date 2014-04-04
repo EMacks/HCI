@@ -1,4 +1,7 @@
-#include <QtSql/QSql>
+#ifndef DATABASE_H
+#define DATABASE_H
+
+#include <QtSql>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlDriver>
 #include <QtSql/QSqlQuery>
@@ -30,19 +33,19 @@ void selectQuery(QString s)
     }
 }
 
-int main(int argc, char *argv[])
+bool test()
 {
-    QApplication app(argc,argv);
     if(!createConnection())
     {
         qDebug()<<"fail";
-        return 1;
+	return false;
     }
     else
     {
         qDebug()<<"pass";
         selectQuery("SELECT * from InputString");
     }
-
-    return 0;
+    return true;
 }
+
+#endif

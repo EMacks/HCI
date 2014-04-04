@@ -16,7 +16,8 @@ void Typing::keyPressEvent(QKeyEvent * event) {
    key.push_back(event->key());
    press.push_back(time->elapsed());
    release.resize(press.size());
-   //std::cout << "key pressed at: " << press[press.size()-1] << std::endl;
+   QLineEdit::keyPressEvent(event);
+//std::cout << "key pressed at: " << press[press.size()-1] << std::endl;
 }
 
 void Typing::keyReleaseEvent(QKeyEvent * event) {
@@ -30,7 +31,6 @@ void Typing::keyReleaseEvent(QKeyEvent * event) {
       release[i] = tmp;
       //std::cout << "released at: " << release[i] << std::endl;
    }
-   QLineEdit::keyPressEvent(event);
    if(toMatch == text())
       emit finished(key, press, release);
 }
