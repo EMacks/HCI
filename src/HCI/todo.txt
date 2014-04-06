@@ -1,0 +1,34 @@
+// Hello
+// we need login dialog
+// connect the database to all my functions
+// a submit button that is disabled until the text is to within 20 characters size of answer.
+// connect the signal of matching to the submit button
+// disable submit for test
+
+checking for mt... no
+checking if : is a manifest tool... no
+checking for shl_load... no
+checking for shl_load in -ldld... no
+checking for dlopen... no
+checking for dld_link in -ldld... no
+checking for _ prefix in compiled symbols... no
+checking for dl.h... no
+checking for sys/dl.h... no
+checking for dld.h... no
+checking for mach-o/dyld.h... no
+checking for strlcat... no
+checking for strlcpy... no
+checking for stricmp... no
+checking for strnicmp... no
+checking if os is AIX ... no - enable check for libthread 
+checking for mutex_lock in -lthread ... no
+checking synch.h usability... no
+checking synch.h presence... no
+checking for synch.h... no
+checking varargs.h usability... no
+checking varargs.h presence... no
+checking for varargs.h... no
+checking msql.h usability... no
+checking msql.h presence... no
+checking for msql.h... no
+checking for _doprnt... no
