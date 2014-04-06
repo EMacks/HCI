@@ -22,7 +22,11 @@ class Typing : public QLineEdit {
 
   signals:
    void finished(const QVector<long long>&, const QVector<long long>&, const QVector<long long>&);
+   void close(bool);
 
+   public slots:
+   void submit();
+   
   private:
    QString toMatch;
    QTime *time;

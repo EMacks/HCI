@@ -8,6 +8,7 @@
 #define TYPINGTEST_H
 
 #include <QWidget>
+#include <QPushButton>
 #include "typing.h"
 #include "tiredanalysis.h"
 
@@ -22,7 +23,7 @@ class TypingTest : public QWidget {
    QLabel *text;
    Typing *write;
    TiredAnalysis analysis;
-
+   QPushButton *submit;
    public slots:
    void calculate(const QVector<long long>&, const QVector<long long>&,
 		  const QVector<long long>&);

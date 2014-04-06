@@ -1,6 +1,9 @@
 #include "typing.h"
 #include <QKeyEvent>
 #include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <cstdlib>
 
 Typing::Typing(QString m, QWidget * parent) : QLineEdit(parent) {
    toMatch = m;
@@ -31,6 +34,13 @@ void Typing::keyReleaseEvent(QKeyEvent * event) {
       release[i] = tmp;
       //std::cout << "released at: " << release[i] << std::endl;
    }
-   if(toMatch == text())
-      emit finished(key, press, release);
+   if(toMatch == text()) 
+      submit();
+   if(std::abs(toMatch.size() - text().size()) < 10)
+      emit close(true);
+}
+
+void Typing::submit() {
+   emit finished(key, press, release);
+   setEnabled(false);
 }

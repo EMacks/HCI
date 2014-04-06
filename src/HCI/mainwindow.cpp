@@ -9,7 +9,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     emTest=new EmotionTest(this);
-    tyTest = new TypingTest(this);
+    tyTest=new TypingTest(this);
     
     setCentralWidget(tyTest);
     emTest->exec();
