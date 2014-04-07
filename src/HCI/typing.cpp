@@ -44,16 +44,19 @@ void Typing::keyPressEvent(QKeyEvent * event) {
    press.push_back(time->elapsed());
    release.resize(press.size());
    if(key[key.size()-1] == Qt::Key_Backspace && atChar > 0
-      && textBackgroundColor() != Qt::red)
+      && textBackgroundColor() != Qt::red) {
       atChar--;
-   else if(check.contains(key[key.size()-1])
-	   && check[key[key.size()-1]] != toMatch[atChar]) {
+   } else if(check.contains(key[key.size()-1])
+	     && check[key[key.size()-1]] != toMatch[atChar]) {
       setTextBackgroundColor(Qt::red);
    } else if(check.contains(key[key.size()-1])){
       setTextBackgroundColor(Qt::transparent);
       atChar++;
+   } else {
+      setTextBackgroundColor(Qt::red);
    }
    QTextEdit::keyPressEvent(event);
+
    
 //std::cout << "key pressed at: " << press[press.size()-1] << std::endl;
 

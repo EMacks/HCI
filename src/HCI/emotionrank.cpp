@@ -5,6 +5,7 @@
 // implementation file for EmotionRank
 //*****************************************************************************
 #include "emotionrank.h"
+#include <QStyleOptionButton>
 
 typedef QList<QRadioButton*>::iterator iterR;
 
@@ -13,7 +14,7 @@ EmotionRank::EmotionRank(QString em,QWidget *p) : QWidget(p) {
    QGridLayout *layout = new QGridLayout();
    QLabel *label=new QLabel(em);
    layout->addWidget(label);
-   
+
    for(int i = 0; i < 5; i++) {
       radios.append(new QRadioButton(mapping[i],this));
    }
@@ -23,6 +24,8 @@ EmotionRank::EmotionRank(QString em,QWidget *p) : QWidget(p) {
       connect(*it, SIGNAL(clicked()), this, SIGNAL(pressed()));
    }
    setLayout(layout);
+   setStyleSheet("QRadioButton::indicator { width: 22px; height: 22px;}");
+
 }
 
 agree EmotionRank::findChecked() {

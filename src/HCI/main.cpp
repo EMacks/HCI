@@ -11,10 +11,10 @@
 int main(int argc, char *argv[])
 {
    QApplication a(argc, argv);
-   // if(DOTHIS()) {
+   if(DOTHIS()) {
       MainWindow w;
       w.show();
-      // }
+   }
    
    return a.exec();
 }
