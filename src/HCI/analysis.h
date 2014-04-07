@@ -21,6 +21,7 @@ class Analysis {
    int addKeyFeature(const QVector<int> &k, 
 		     const QVector<int> &p,
 		     const QVector<int> &r);
+   KeyFeatures results(const int &latest);
 
   private:
    void determine(const int &latest);

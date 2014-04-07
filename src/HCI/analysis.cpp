@@ -123,6 +123,11 @@ int Analysis::addKeyFeature(const QVector<int> &k,
   return data.size() - 1; 
 }
 
+KeyFeatures Analysis::results(const int &latest) {
+   determine(latest);
+   return *result;
+}
+
 // make sure everything is already normalized
 bool Analysis::isTired(const int &latest) {
    determine(latest);

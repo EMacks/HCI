@@ -1,3 +1,4 @@
 // we need login dialog
-// connect the database to all my functions
+// buffer loading your data do so in typingtest
+// connect the database to all my functions 
 // make buttons bigger for emotion stuff
