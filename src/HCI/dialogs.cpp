@@ -8,12 +8,13 @@
 
 Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
 {
-    emTest=new EmotionTest(this);
-    tyTest=new TypingTest(this);
-
-    //login->exec();
-    emTest->exec();
-    tyTest->exec();
-    
+   login=new Login(this);
+   emTest=new EmotionTest(this);
+   tyTest=new TypingTest(this);
+   
+   login->exec();
+   emTest->exec();
+   tyTest->exec();
+   
 }
 

@@ -10,6 +10,7 @@
 #include <QMainWindow>
 #include "emotiontest.h"
 #include "typingtest.h"
+#include "login.h"
 
 class Dialogs : public QWidget
 {
@@ -18,6 +19,7 @@ class Dialogs : public QWidget
 public:
     Dialogs(QWidget *parent = 0);
 private:
+    Login *login;
     EmotionTest *emTest;
     TypingTest *tyTest;
 };
