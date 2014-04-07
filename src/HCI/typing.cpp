@@ -4,13 +4,37 @@
 #include <cmath>
 #include <algorithm>
 #include <cstdlib>
+#include <QTextCursor>
+#include <QMap>
 
-Typing::Typing(QString m, QWidget * parent) : QLineEdit(parent) {
+QMap<int, QChar> check;
+
+void dofill() {
+   check[(int)Qt::Key_Enter] = QChar('\n');
+   for(int i = 0; i < 10; i++)
+      check[(int)(Qt::Key_0+i)] = QChar('0'+i);
+   for(int i = 0; i < 26; i++)
+      check[(int)(Qt::Key_A+i)] = QChar('a'+i);
+   check[(int)Qt::Key_Space] = QChar(' ');
+   check[(int)Qt::Key_Comma] = QChar(',');
+   check[(int)Qt::Key_Minus] = QChar('-');
+   check[(int)Qt::Key_Period] = QChar('.');
+   check[(int)Qt::Key_Slash] = QChar('/');
+   check[(int)Qt::Key_Apostrophe] = QChar('\'');
+   check[(int)Qt::Key_Semicolon] = QChar(';');
+ }
+
+Typing::Typing(QString m, QWidget * parent) : QTextEdit(parent) {
+   dofill();
    toMatch = m;
-   for(int i = 0; i < (int)toMatch.size(); ++i) {
+   for(int i = 0; i < toMatch.size(); i++) {
       if(toMatch[i] == '\n')
 	 toMatch[i] = ' ';
    }
+   QTextCursor textCursor = this->textCursor();
+   textCursor.clearSelection();
+   this->setTextCursor(textCursor);
+   atChar = 0;
    time = new QTime();
    time->start();
 }
@@ -19,12 +43,24 @@ void Typing::keyPressEvent(QKeyEvent * event) {
    key.push_back(event->key());
    press.push_back(time->elapsed());
    release.resize(press.size());
-   QLineEdit::keyPressEvent(event);
+   if(key[key.size()-1] == Qt::Key_Backspace && atChar > 0
+      && textBackgroundColor() != Qt::red)
+      atChar--;
+   else if(check.contains(key[key.size()-1])
+	   && check[key[key.size()-1]] != toMatch[atChar]) {
+      setTextBackgroundColor(Qt::red);
+   } else if(check.contains(key[key.size()-1])){
+      setTextBackgroundColor(Qt::transparent);
+      atChar++;
+   }
+   QTextEdit::keyPressEvent(event);
+   
 //std::cout << "key pressed at: " << press[press.size()-1] << std::endl;
+
 }
 
 void Typing::keyReleaseEvent(QKeyEvent * event) {
-   long long tmp = time->elapsed();
+   int tmp = time->elapsed();
    int i;
    for(i = key.size()- 1; i >= 0; --i) {
       if(event->key() == key[i])
@@ -34,13 +70,8 @@ void Typing::keyReleaseEvent(QKeyEvent * event) {
       release[i] = tmp;
       //std::cout << "released at: " << release[i] << std::endl;
    }
-   if(toMatch == text()) 
-      submit();
-   if(std::abs(toMatch.size() - text().size()) < 10)
-      emit close(true);
-}
-
-void Typing::submit() {
-   emit finished(key, press, release);
-   setEnabled(false);
+   if(toMatch == toPlainText()) {
+      emit finished(key, press, release);
+      setEnabled(false);
+   }
 }

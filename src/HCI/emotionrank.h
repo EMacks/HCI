@@ -20,6 +20,9 @@ class EmotionRank: public QWidget{
 public:
     EmotionRank(QString em="", QWidget *p=0);
     agree findChecked();
+
+  signals:
+    void pressed();
   private:
     QList<QRadioButton*> radios;
 };

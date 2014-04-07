@@ -7,12 +7,12 @@
 #ifndef TYPING_H
 #define TYPING_H
 
-#include <QLineEdit>
+#include <QTextEdit>
 #include <QTime>
 
 class QKeyEvent;
 
-class Typing : public QLineEdit {
+class Typing : public QTextEdit {
    Q_OBJECT
   public:
    Typing(QString m="", QWidget * parent=0);
@@ -21,18 +21,15 @@ class Typing : public QLineEdit {
    virtual void keyReleaseEvent(QKeyEvent * event);
 
   signals:
-   void finished(const QVector<long long>&, const QVector<long long>&, const QVector<long long>&);
-   void close(bool);
-
-   public slots:
-   void submit();
+   void finished(const QVector<int>&, const QVector<int>&, const QVector<int>&);
    
   private:
    QString toMatch;
    QTime *time;
-   QVector<long long> key;
-   QVector<long long> press;
-   QVector<long long> release;
+   int atChar;
+   QVector<int> key;
+   QVector<int> press;
+   QVector<int> release;
 };
 
 #endif

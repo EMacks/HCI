@@ -10,7 +10,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include "typing.h"
-#include "tiredanalysis.h"
+#include "analysis.h"
 
 class QLabel;
 
@@ -22,11 +22,11 @@ class TypingTest : public QWidget {
    QLabel *explain;
    QLabel *text;
    Typing *write;
-   TiredAnalysis analysis;
-   QPushButton *submit;
+   Analysis analysis;
+
    public slots:
-   void calculate(const QVector<long long>&, const QVector<long long>&,
-		  const QVector<long long>&);
+   void calculate(const QVector<int>&, const QVector<int>&,
+		  const QVector<int>&);
 };
 
 #endif

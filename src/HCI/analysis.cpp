@@ -1,4 +1,4 @@
-#include "tiredanalysis.h"
+#include "analysis.h"
 #include <climits>
 #include <cmath>
 #include <cstdlib>
@@ -6,38 +6,38 @@
 #include <iostream>
 using namespace std;
 
-TiredAnalysis::TiredAnalysis() {
+Analysis::Analysis() {
    result = new KeyFeatures();
 }
 
-int TiredAnalysis::addKeyFeature(KeyFeatures a) { 
+int Analysis::addKeyFeature(KeyFeatures a) { 
   data.push_back(a);
   return data.size() - 1; 
 }
 
-int TiredAnalysis::addKeyFeature(const QVector<long long> &k,
-				 const QVector<long long> &p,
-				 const QVector<long long> &r) {
+int Analysis::addKeyFeature(const QVector<int> &k,
+				 const QVector<int> &p,
+				 const QVector<int> &r) {
   KeyFeatures a;
-  Features boundry;
-  boundry.min = LLONG_MAX;
-  boundry.max = LLONG_MIN;
-  boundry.size = boundry.std = boundry.mean = 0;
-  a.set_2G_1D2D(boundry);
-  a.set_2G_1Dur(boundry);
-  a.set_2G_KeyLat(boundry);
-  a.set_2G_2Dur(boundry);
-  a.set_2G_Dur(boundry);
-  a.set_2G_NumEvents(boundry);
-  a.set_3G_1D2D(boundry);
-  a.set_3G_1Dur(boundry);
-  a.set_3G_1KeyLat(boundry);
-  a.set_3G_2D3D(boundry);
-  a.set_3G_2Dur(boundry);
-  a.set_3G_2KeyLat(boundry);
-  a.set_3G_3Dur(boundry);
-  a.set_3G_Dur(boundry);
-  a.set_3G_NumEvents(boundry);
+  Features boundary;
+  boundary.min = INT_MAX;
+  boundary.max = INT_MIN;
+  boundary.size = boundary.std = boundary.mean = 0;
+  a.set_2G_1D2D(boundary);
+  a.set_2G_1Dur(boundary);
+  a.set_2G_KeyLat(boundary);
+  a.set_2G_2Dur(boundary);
+  a.set_2G_Dur(boundary);
+  a.set_2G_NumEvents(boundary);
+  a.set_3G_1D2D(boundary);
+  a.set_3G_1Dur(boundary);
+  a.set_3G_1KeyLat(boundary);
+  a.set_3G_2D3D(boundary);
+  a.set_3G_2Dur(boundary);
+  a.set_3G_2KeyLat(boundary);
+  a.set_3G_3Dur(boundary);
+  a.set_3G_Dur(boundary);
+  a.set_3G_NumEvents(boundary);
 
   for(int i = 0;i < data.size(); ++i) {
     if(data[i].access_2G_1D2D().min < a.access_2G_1D2D().min)
@@ -124,7 +124,7 @@ int TiredAnalysis::addKeyFeature(const QVector<long long> &k,
 }
 
 // make sure everything is already normalized
-bool TiredAnalysis::isTired(const int &latest) {
+bool Analysis::isTired(const int &latest) {
    determine(latest);
    if((*result).access_2G_1D2D().mean <= 0.049) 
       if((*result).access_3G_1Dur().mean <= 0.037) 
@@ -186,7 +186,7 @@ void output(ofstream& out, const Features& a) {
        << endl;
 }
 
-void TiredAnalysis::determine(const int &latest) {
+void Analysis::determine(const int &latest) {
   cerr << latest << endl;
   (*result).set_2G_1D2D(data[latest].access_2G_1D2D());
   (*result).set_2G_1Dur(data[latest].access_2G_1Dur());

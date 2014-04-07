@@ -28,7 +28,7 @@ public:
    EmotionTest(QWidget *p=0);
 public slots:
    void findChecked();
-   
+   void enableSubmit();
 private:
    QList<EmotionRank*> emotions;
    QPushButton *submit;

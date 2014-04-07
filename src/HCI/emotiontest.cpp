@@ -12,6 +12,7 @@ typedef QList<EmotionRank*>::iterator iterER;
 EmotionTest::EmotionTest(QWidget *p) : QDialog(p) {
    QGridLayout *layout=new QGridLayout();
    submit = new QPushButton("Submit", this);
+   submit->setEnabled(false);
    for(int i = 0; i < 15; i++) {
       emotions.append(new EmotionRank(emo[i], this));
    }
@@ -19,12 +20,21 @@ EmotionTest::EmotionTest(QWidget *p) : QDialog(p) {
 
    for(iterER it= emotions.begin(); it != emotions.end();i++, ++it){
       layout->addWidget(*it,i,0,1,1);
+      connect(*it, SIGNAL(pressed()), this, SLOT(enableSubmit()));
    }
    connect(submit, SIGNAL(clicked()), this, SLOT(findChecked()));  
    connect(submit, SIGNAL(clicked()), this, SLOT(close()));
 
    layout->addWidget(submit, emotions.length(), 0, 1, 1);
    setLayout(layout);
+}
+
+void EmotionTest::enableSubmit() {
+   for(iterER it= emotions.begin(); it != emotions.end(); ++it) {
+      if((*it)->findChecked() == Nothing)	\
+	 return;
+   }
+   submit->setEnabled(true);
 }
 
 void EmotionTest::findChecked() {
@@ -38,6 +48,4 @@ void EmotionTest::findChecked() {
 		<< std::endl;
 */
    }
-
-
 }

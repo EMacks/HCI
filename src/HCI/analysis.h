@@ -4,23 +4,23 @@
 // by: Erin Mackey and Camara Lerner
 // header file for TiredAnalysis
 //*****************************************************************************
-#ifndef TIREDANALYSIS_H
-#define TIREDANALYSIS_H
+#ifndef ANALYSIS_H
+#define ANALYSIS_H
 
 #include <Qt>
 #include <QVector>
 #include "keyfeatures.h"
 
-class TiredAnalysis {
+class Analysis {
   public:
-   TiredAnalysis();
+   Analysis();
 
    bool isTired(const int &latest);
    
    int addKeyFeature(KeyFeatures a);
-   int addKeyFeature(const QVector<long long> &k, 
-		     const QVector<long long> &p,
-		     const QVector<long long> &r);
+   int addKeyFeature(const QVector<int> &k, 
+		     const QVector<int> &p,
+		     const QVector<int> &r);
 
   private:
    void determine(const int &latest);

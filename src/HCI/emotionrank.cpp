@@ -20,6 +20,7 @@ EmotionRank::EmotionRank(QString em,QWidget *p) : QWidget(p) {
    int i=0;
    for(iterR it = radios.begin(); it != radios.end(); ++it, ++i){
       layout->addWidget(*it,0,i+1,1,1);
+      connect(*it, SIGNAL(clicked()), this, SIGNAL(pressed()));
    }
    setLayout(layout);
 }

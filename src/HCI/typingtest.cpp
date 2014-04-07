@@ -12,29 +12,24 @@ TypingTest::TypingTest(QWidget * parent) : QWidget(parent) {
    text = new QLabel(QUOTES[rand() % 42]);
    text->setWordWrap(true);
    write = new Typing(text->text(), 0);
-   submit = new QPushButton("Submit", 0);
-   submit->setEnabled(false);
-   connect(write,SIGNAL(finished(const QVector<long long>&,
-				 const QVector<long long>&,
-				 const QVector<long long>&)),
-	   this, SLOT(calculate(const QVector<long long>&,
-				const QVector<long long>&,
-				const QVector<long long>&))); 
-   connect(write, SIGNAL(close(bool)), submit, SLOT(setEnabled(bool)));
-   connect(submit,SIGNAL(clicked()), write, SLOT(submit())); 
+   connect(write,SIGNAL(finished(const QVector<int>&,
+				 const QVector<int>&,
+				 const QVector<int>&)),
+	   this, SLOT(calculate(const QVector<int>&,
+				const QVector<int>&,
+				const QVector<int>&))); 
    QVBoxLayout *layout = new QVBoxLayout(this);
    layout->addWidget(explain);
    layout->addWidget(text);
    layout->addWidget(write);
-   layout->addWidget(submit);
 
    setLayout(layout);
    
 }
 
-void TypingTest::calculate(const QVector<long long> &key,
-			   const QVector<long long> &press,
-			   const QVector<long long> &release) {
+void TypingTest::calculate(const QVector<int> &key,
+			   const QVector<int> &press,
+			   const QVector<int> &release) {
    int latest = 0;
    analysis.addKeyFeature(key, press, release);
    if(analysis.isTired(latest)) {
@@ -42,5 +37,4 @@ void TypingTest::calculate(const QVector<long long> &key,
    } else {
       std::cerr << "apparently you are not tired" << std::endl;
    }
-
 }
