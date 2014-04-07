@@ -4,22 +4,22 @@
 // by: Erin Mackey and Camara Lerner
 // header file for MainWindow
 //*****************************************************************************
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef DIALOGS_H
+#define DIALOGS_H
 
 #include <QMainWindow>
 #include "emotiontest.h"
 #include "typingtest.h"
 
-class MainWindow : public QMainWindow
+class Dialogs : public QWidget
 {
     Q_OBJECT
     
 public:
-    MainWindow(QWidget *parent = 0);
+    Dialogs(QWidget *parent = 0);
 private:
     EmotionTest *emTest;
     TypingTest *tyTest;
 };
 
-#endif // MAINWINDOW_H
+#endif 

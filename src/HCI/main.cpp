@@ -4,7 +4,7 @@
 // by: Erin Mackey and Camara Lerner
 // Main file which is awesome
 //*****************************************************************************
-#include "mainwindow.h"
+#include "dialogs.h"
 #include <QApplication>
 #include "database.h"
 
@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
    QApplication a(argc, argv);
    if(DOTHIS()) {
-      MainWindow w;
+      Dialogs w;
       w.show();
    }
    

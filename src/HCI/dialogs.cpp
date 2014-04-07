@@ -4,14 +4,16 @@
 // by: Erin Mackey and Camara Lerner
 // implementation file for MainWindow
 //*****************************************************************************
-#include "mainwindow.h"
+#include "dialogs.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
 {
     emTest=new EmotionTest(this);
     tyTest=new TypingTest(this);
-    
-    setCentralWidget(tyTest);
+
+    //login->exec();
     emTest->exec();
+    tyTest->show();
+    
 }
 

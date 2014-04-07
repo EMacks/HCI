@@ -45,7 +45,6 @@ bool DOTHIS()
     else
     {
         qDebug()<<"pass";
-        //pickQuery("SELECT * from InputString");
     }
     return true;
 }
