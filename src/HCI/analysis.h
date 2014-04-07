@@ -2,7 +2,7 @@
 // CPSC 3770 Human Computer Interaction
 // Prof: Kevin Grant
 // by: Erin Mackey and Camara Lerner
-// header file for TiredAnalysis
+// header file for Analysis
 //*****************************************************************************
 #ifndef ANALYSIS_H
 #define ANALYSIS_H

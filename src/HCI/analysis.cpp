@@ -1,3 +1,9 @@
+//*****************************************************************************
+// CPSC 3770 Human Computer Interaction
+// Prof: Kevin Grant
+// by: Erin Mackey and Camara Lerner
+// implementation file for Analysis
+//*****************************************************************************
 #include "analysis.h"
 #include <climits>
 #include <cmath>
@@ -185,14 +191,7 @@ bool Analysis::isTired(const int &latest) {
 		  return false;
 }
 
-void output(ofstream& out, const Features& a) {
-   out << "min: " << a.min  << ", max: " << a.max << ", mean: "
-       << a.mean << ", std: " << a.std << ", size: " << a.size
-       << endl;
-}
-
 void Analysis::determine(const int &latest) {
-  cerr << latest << endl;
   (*result).set_2G_1D2D(data[latest].access_2G_1D2D());
   (*result).set_2G_1Dur(data[latest].access_2G_1Dur());
   (*result).set_2G_KeyLat(data[latest].access_2G_KeyLat());
@@ -210,69 +209,6 @@ void Analysis::determine(const int &latest) {
   (*result).set_3G_NumEvents(data[latest].access_3G_NumEvents());
   (*result).set_numMistakes(data[latest].access_numMistakes());
     
-  /*  cerr << (*result).access_2G_1D2D().min << " " << (*result).access_2G_1D2D().max 
-       << endl;
-  
-  cerr << (*result).access_2G_1Dur().min << " "  << (*result).access_2G_1Dur().max << endl;
-  
-  cerr << (*result).access_2G_KeyLat().min << " " << (*result).access_2G_KeyLat().max << endl;
-    
-  cerr << (*result).access_2G_2Dur().min << " " <<  (*result).access_2G_2Dur().max << endl;
-    
-  cerr << (*result).access_2G_Dur().min << " " << (*result).access_2G_Dur().max << endl;
-    
-  cerr << (*result).access_2G_NumEvents().min << " " << (*result).access_2G_NumEvents().max 
-       << endl;
-
-  cerr << (*result).access_3G_1D2D().min << " " << (*result).access_3G_1D2D().max << endl;
-
-  cerr << (*result).access_3G_1Dur().min << " " << (*result).access_3G_1Dur().max << endl;
-
-  cerr << (*result).access_3G_1KeyLat().min << " " << (*result).access_3G_1KeyLat().max
-       << endl;
-
-  cerr << (*result).access_3G_2D3D().min << " " << (*result).access_3G_2D3D().max << endl;
-
-  cerr << (*result).access_3G_2Dur().min << " " << (*result).access_3G_2Dur().max << endl;
-    
-  cerr << (*result).access_3G_2KeyLat().min << " " << (*result).access_3G_2KeyLat().max
-       << endl;
-
-  cerr <<  (*result).access_3G_3Dur().min << " " << (*result).access_3G_3Dur().max << endl;
-
-  cerr << (*result).access_3G_Dur().min << " " << (*result).access_3G_Dur().max << endl;
-    
-  cerr << (*result).access_3G_NumEvents().min << " " << (*result).access_3G_NumEvents().max 
-       << endl;
-  */
-   ofstream out("tiredData.txt", ofstream::out);
-   out << "2G_1D2D: ";
-   output(out, (*result).access_2G_1D2D());
-   out << endl; 
-   out << "2G_1Dur: ";
-   output(out, (*result).access_2G_1Dur());
-   out << endl;
-   out << "2G_KeyLat: ";
-   output(out, (*result).access_2G_KeyLat());
-   out << endl;
-   out << "2G_2Dur: "; output(out, (*result).access_2G_2Dur()); out << endl;
-   out << "2G_Dur: "; output(out, (*result).access_2G_Dur()); out << endl;
-   out << "2G_1NumEvents: "; output(out, (*result).access_2G_NumEvents());
-   out << endl;
-   out << "3G_1D2D: "; output(out, (*result).access_3G_1D2D()); out <<  endl;
-   out << "3G_1Dur: "; output(out, (*result).access_3G_1Dur()); out <<  endl;
-   out << "3G_1KeyLat: "; output(out, (*result).access_3G_1KeyLat());
-   out << endl;
-   out << "3G_2D3D: "; output(out, (*result).access_3G_2D3D()); out << endl;
-   out << "3G_2Dur: "; output(out, (*result).access_3G_2Dur()); out << endl;
-   out << "3G_2KeyLat: "; output(out, (*result).access_3G_2KeyLat());
-   out << endl;
-   out << "3G_3Dur: "; output(out, (*result).access_3G_3Dur()); out << endl;
-   out << "3G_Dur: "; output(out, (*result).access_3G_Dur()); out << endl;
-   out << "3G_NumEvents: "; output(out, (*result).access_3G_NumEvents());
-   out << endl;
-   out << "Num of Mistakes: " << (*result).access_numMistakes() << endl;
-   
 }
 
 
