@@ -13,7 +13,7 @@ Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
 
     //login->exec();
     emTest->exec();
-    tyTest->show();
+    tyTest->exec();
     
 }
 
