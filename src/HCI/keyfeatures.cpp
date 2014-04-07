@@ -4,9 +4,6 @@
 // by: Erin Mackey and Camara Lerner
 // Implementation file for KeyFeatures
 //*****************************************************************************
-
-// you are currently looking at page 35
-
 #include "keyfeatures.h"
 #include <cmath>
 #include <cstdlib>
@@ -137,7 +134,6 @@ int KeyFeatures::calcNumMistakes(const QVector<int>& key) {
   }
   return count;
 }
-// Qt::Key_Apostrophe >= here >= Qt::Key_Z
 
 QVector<int>* KeyFeatures::calc_2G_1D2D(const QVector<int>& press) {
    QVector<int> *a = new QVector<int>();

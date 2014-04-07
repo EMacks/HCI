@@ -42,11 +42,6 @@ void EmotionTest::findChecked() {
    int i =0;
    for(iterER it = emotions.begin(); it != emotions.end(); ++it, ++i) {
       ans[i] = (*it)->findChecked();
-/*
-  // how to access the answers from this information
-  std::cerr << emo[i].toStdString() << " " << mapping[ans[i]].toStdString()
-		<< std::endl;
-*/
    }
    emit results(emotions);
 }

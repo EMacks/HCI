@@ -1,3 +1,9 @@
+//*****************************************************************************
+// CPSC 3770 Human Computer Interaction
+// Prof: Kevin Grant
+// by: Erin Mackey and Camara Lerner
+// implementation file for Typing
+//*****************************************************************************
 #include "typing.h"
 #include <QKeyEvent>
 #include <iostream>
@@ -58,7 +64,6 @@ void Typing::keyPressEvent(QKeyEvent * event) {
    QTextEdit::keyPressEvent(event);
 
    
-//std::cout << "key pressed at: " << press[press.size()-1] << std::endl;
 
 }
 
@@ -71,7 +76,6 @@ void Typing::keyReleaseEvent(QKeyEvent * event) {
    }
    if(i >= 0) {
       release[i] = tmp;
-      //std::cout << "released at: " << release[i] << std::endl;
    }
    if(toMatch == toPlainText()) {
       emit finished(key, press, release);
