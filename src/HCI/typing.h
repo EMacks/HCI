@@ -9,6 +9,7 @@
 
 #include <QTextEdit>
 #include <QTime>
+#include <QMouseEvent>
 
 class QKeyEvent;
 
@@ -22,6 +23,12 @@ class Typing : public QTextEdit {
 
   signals:
    void finished(const QVector<int>&, const QVector<int>&, const QVector<int>&);
+
+ protected:
+   virtual void mousePressEvent(QMouseEvent*) {}
+   virtual void mouseMoveEvent(QMouseEvent*) {}
+   virtual void mouseReleaseEvent(QMouseEvent*) {}
+   virtual void grabMouse() {}
    
   private:
    QString toMatch;

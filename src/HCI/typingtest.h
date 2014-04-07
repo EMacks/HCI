@@ -9,6 +9,7 @@
 
 #include <QDialog>
 #include <QPushButton>
+#include <QString>
 #include "typing.h"
 #include "analysis.h"
 
@@ -17,22 +18,25 @@ class QLabel;
 class TypingTest : public QDialog {
    Q_OBJECT
   public:
-   TypingTest(QWidget *parent=0);
-  private:
-   QLabel *explain;
-   QLabel *text;
-   Typing *write;
-   Analysis analysis;
+  TypingTest(const QString& a, QWidget *parent=0);
 
   signals:
    void results(const KeyFeatures&);
    void findPrevious();
+   
    
    public slots:
    void calculate(const QVector<int>&, const QVector<int>&,
 		  const QVector<int>&);
    void acceptedInfo(bool);
    void inputKeyFeatures(const QList<KeyFeatures>&);
+
+  private:
+   QString quote;
+   QLabel *explain;
+   QLabel *text;
+   Typing *write;
+   Analysis analysis;
 };
 
 #endif

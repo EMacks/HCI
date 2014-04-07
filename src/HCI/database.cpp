@@ -25,6 +25,16 @@ void Database::pickQuery(QString s) {
     }
 }
 
+void Database::getQuote(int a) {
+  QSqlQuery query;
+  QString sql = QString("select text from InputString where ID=\'%1\'").arg(a);
+  inputStringID=a;
+  query.exec(sql);
+  query.next();
+  QString quote = query.value(0).toString();
+  emit setQuote(quote);
+}
+
 void Database::login(const QString& username, const QString& password) {
    // do database stuff to check if the username and password are a valid combination
   QSqlQuery query;
@@ -76,11 +86,6 @@ void Database::previousTyping() {
    emit previousTypingResults(a);
 }
 
-void Database::() {
-(emoID).arg(emo[0]->findChecked()).arg(emo[1]->findChecked()).arg(emo[2]->findChecked()).arg(emo[3]->findChecked()).arg(emo[4]->findChecked()).arg(emo[5]->findChecked()).arg(emo[6]->findChecked()).arg(emo[7]->findChecked()).arg(emo[8]->findChecked()).arg(emo[9]->findChecked()).arg(emo[10]->findChecked()).arg(emo[11]->findChecked()).arg(emo[12]->findChecked()).arg(emo[13]->findChecked()).arg(emo[14]->findChecked());
-   emit acceptEmotions(query.exec(sql));
-}
-
 void Database::makeTest() {
    // if the database accepts the information
    QSqlQuery query;
@@ -91,7 +96,7 @@ void Database::makeTest() {
      ID = query.value(0).toInt();
    }
    ID++;
-   QString sql = QString("insert into Test values(%0, %1, %2, %3, CURRENT_TIMESTAMP, %5)").arg(ID).arg(username).arg(emoID).arg(typingID).arg(inputStringID);
+   QString sql = QString("insert into Test values(%0, \'%1\', %2, %3, now(), %5)").arg(ID).arg(username).arg(emoID).arg(typingID).arg(inputStringID);
    query.exec(sql);
-
+   
 }

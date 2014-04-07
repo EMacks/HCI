@@ -20,20 +20,22 @@ class Database : public QWidget {
    Database(QWidget* parent=0);
    bool makeConnection();
    void pickQuery(QString s);
-   void makeTest();
-
+  
   signals:
    void acceptLogin(bool);
    void acceptEmotions(bool);
    void acceptTyping(bool);
    void previousTypingResults(const QList<KeyFeatures>&);
+   void setQuote(const QString&);
 
    public slots:
    void login(const QString& username, const QString& password);
    void Emotions(const QList<EmotionRank*>&);
    void Typing(const KeyFeatures&);
    void previousTyping();
-
+   void getQuote(int);
+   void makeTest();
+   
   private:
    QString username;
    int emoID, typingID, inputStringID;

@@ -12,15 +12,29 @@ Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
 {
    login=new Login(this);
    emTest=new EmotionTest(this);
-   tyTest=new TypingTest(this);
    data = new Database(this);
+   QLabel a("Thanks for participating", this);
+   QHBoxLayout lay;
+   lay.addWidget(&a);
+   setLayout(&lay);
    
    if(data->makeConnection()) {
+
+     // initializing the quote to be displayed in the typing test
+     connect(this, SIGNAL(getQuote(int)), data, SLOT(getQuote(int)));
+     connect(data, SIGNAL(setQuote(const QString&)), this,
+	     SLOT(setQuote(const QString&)));
+
+     srand(time(NULL));
+     emit getQuote(rand() % 42);
+    
+
       // checks the username and password combination
       connect(login, SIGNAL(info(const QString&, const QString&)),
 	      data, SLOT(login(const QString&, const QString&)));
       // if the username and password are valid then closes dialog
-      connect(data, SIGNAL(acceptLogin(bool)), login, SLOT(acceptedInfo(bool)));
+      connect(data, SIGNAL(acceptLogin(bool)), login, 
+	      SLOT(acceptedInfo(bool)));
 
       // moves onto the EmotionTest
       connect(login, SIGNAL(accepted()), emTest, SLOT(exec()));
@@ -47,13 +61,13 @@ Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
       connect(data, SIGNAL(acceptTyping(bool)), tyTest,
 	      SLOT(acceptedInfo(bool)));
       // closes everything
-      connect(tyTest, SIGNAL(accepted()), this, SLOT(close()));
+      connect(tyTest, SIGNAL(accepted()), data, SLOT(makeTest()));
 
       login->exec();
-      QLabel a("Thanks for participating", this);
-      QHBoxLayout lay;
-      lay.addWidget(&a);
-      setLayout(&lay);
+
      }
 }
 
+void Dialogs::setQuote(const QString & a) {
+  tyTest=new TypingTest(a, this);
+}

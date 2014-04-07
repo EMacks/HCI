@@ -20,6 +20,11 @@ class Dialogs : public QWidget
     
 public:
     Dialogs(QWidget *parent = 0);
+ signals:
+    void getQuote(int);
+    public slots:
+    void setQuote(const QString&);
+
 private:
     Login *login;
     EmotionTest *emTest;
