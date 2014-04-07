@@ -6,7 +6,7 @@
 #include <iostream>
 #include <time.h>
 
-TypingTest::TypingTest(QWidget * parent) : QWidget(parent) {
+TypingTest::TypingTest(QWidget * parent) : QDialog(parent) {
    srand(time(NULL));
    explain = new QLabel("Please type the following:");
    text = new QLabel(QUOTES[rand() % 42]);

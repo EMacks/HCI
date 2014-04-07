@@ -7,14 +7,14 @@
 #ifndef TYPINGTEST_H
 #define TYPINGTEST_H
 
-#include <QWidget>
+#include <QDialog>
 #include <QPushButton>
 #include "typing.h"
 #include "analysis.h"
 
 class QLabel;
 
-class TypingTest : public QWidget {
+class TypingTest : public QDialog {
    Q_OBJECT
   public:
    TypingTest(QWidget *parent=0);
