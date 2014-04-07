@@ -5,6 +5,8 @@
 // implementation file for MainWindow
 //*****************************************************************************
 #include "dialogs.h"
+#include <QLabel>
+#include <QHBoxLayout>
 
 Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
 {
@@ -13,7 +15,7 @@ Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
    tyTest=new TypingTest(this);
    data = new Database(this);
    
-   //if(data->makeConnection()) {
+   if(data->makeConnection()) {
       // checks the username and password combination
       connect(login, SIGNAL(info(const QString&, const QString&)),
 	      data, SLOT(login(const QString&, const QString&)));
@@ -48,7 +50,10 @@ Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
       connect(tyTest, SIGNAL(accepted()), this, SLOT(close()));
 
       login->exec();
-      
-      //}
+      QLabel a("Thanks for participating", this);
+      QHBoxLayout lay;
+      lay.addWidget(&a);
+      setLayout(&lay);
+     }
 }
 

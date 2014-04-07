@@ -39,24 +39,24 @@ class KeyFeatures {
   void calculate(const QVector<int>& key, 
 		 const QVector<int>& press, 
 		 const QVector<int>& release);
-  const Features& access_2G_1D2D() { return diG_1D2D;}
-  const Features& access_2G_1Dur() { return diG_1Dur;}
-  const Features& access_2G_KeyLat() { return diG_KeyLat;}
-  const Features& access_2G_2Dur() { return diG_2Dur;}
-  const Features& access_2G_Dur() { return diG_Dur;}
-  const Features& access_2G_NumEvents() { return diG_NumEvents;}
-  const Features& access_3G_1D2D() { return triG_1D2D;}
-  const Features& access_3G_1Dur() { return triG_1Dur;}
-  const Features& access_3G_1KeyLat() { return triG_1KeyLat;}
-  const Features& access_3G_2D3D() { return triG_2D3D;}
-  const Features& access_3G_2Dur() { return triG_2Dur;}
-  const Features& access_3G_2KeyLat() {return triG_2KeyLat;}
-  const Features& access_3G_3Dur() { return triG_3Dur;}
-  const Features& access_3G_Dur() { return triG_Dur;}
-  const Features& access_3G_NumEvents() { return triG_NumEvents;}
-  const int& access_numMistakes() { return numMistakes; }
-  const int& access_2G_num() { return diG_num; }
-  const int& access_3G_num() { return triG_num; }
+  const Features& access_2G_1D2D() const { return diG_1D2D;}
+  const Features& access_2G_1Dur() const { return diG_1Dur;}
+  const Features& access_2G_KeyLat() const { return diG_KeyLat;}
+  const Features& access_2G_2Dur() const { return diG_2Dur;}
+  const Features& access_2G_Dur() const { return diG_Dur;}
+  const Features& access_2G_NumEvents() const { return diG_NumEvents;}
+  const Features& access_3G_1D2D() const { return triG_1D2D;}
+  const Features& access_3G_1Dur() const { return triG_1Dur;}
+  const Features& access_3G_1KeyLat() const { return triG_1KeyLat;}
+  const Features& access_3G_2D3D() const { return triG_2D3D;}
+  const Features& access_3G_2Dur() const { return triG_2Dur;}
+  const Features& access_3G_2KeyLat() const {return triG_2KeyLat;}
+  const Features& access_3G_3Dur() const { return triG_3Dur;}
+  const Features& access_3G_Dur() const { return triG_Dur;}
+  const Features& access_3G_NumEvents() const { return triG_NumEvents;}
+  const int& access_numMistakes() const { return numMistakes; }
+  const int& access_2G_num() const { return diG_num; }
+  const int& access_3G_num() const { return triG_num; }
 
   void set_2G_1D2D(const Features &a) { diG_1D2D = a;}
   void set_2G_1Dur(const Features &a) { diG_1Dur = a;}

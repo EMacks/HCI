@@ -20,6 +20,7 @@ class Database : public QWidget {
    Database(QWidget* parent=0);
    bool makeConnection();
    void pickQuery(QString s);
+   void makeTest();
 
   signals:
    void acceptLogin(bool);
@@ -34,6 +35,7 @@ class Database : public QWidget {
    void previousTyping();
 
   private:
-   QString username, password;
+   QString username;
+   int emoID, typingID, inputStringID;
 };
 #endif
