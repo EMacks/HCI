@@ -5,6 +5,7 @@
 // Implementation file for EmotionTest
 //*****************************************************************************
 #include "emotiontest.h"
+#include <QMessageBox>
 #include <iostream>
 
 typedef QList<EmotionRank*>::iterator iterER;
@@ -23,15 +24,14 @@ EmotionTest::EmotionTest(QWidget *p) : QDialog(p) {
       connect(*it, SIGNAL(pressed()), this, SLOT(enableSubmit()));
    }
    connect(submit, SIGNAL(clicked()), this, SLOT(findChecked()));  
-   connect(submit, SIGNAL(clicked()), this, SLOT(close()));
-
+   connect(this, SIGNAL(accepted()), this, SLOT(close()));
    layout->addWidget(submit, emotions.length(), 0, 1, 1);
    setLayout(layout);
 }
 
 void EmotionTest::enableSubmit() {
    for(iterER it= emotions.begin(); it != emotions.end(); ++it) {
-      if((*it)->findChecked() == Nothing)	\
+      if((*it)->findChecked() == Nothing)	
 	 return;
    }
    submit->setEnabled(true);
@@ -47,5 +47,15 @@ void EmotionTest::findChecked() {
   std::cerr << emo[i].toStdString() << " " << mapping[ans[i]].toStdString()
 		<< std::endl;
 */
+   }
+   emit results(emotions);
+}
+
+void EmotionTest::acceptedInfo(bool a) {
+   if(a) {
+      emit accepted();
+   } else {
+      QMessageBox::warning(this, tr("database connection problem"),
+			   tr("The database is not able to accept the data"));
    }
 }

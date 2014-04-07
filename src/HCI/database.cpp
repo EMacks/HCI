@@ -1,8 +1,9 @@
 #include "database.h"
 
+Database::Database(QWidget* parent) : QWidget(parent) {}
+
 bool Database::makeConnection() {
    QStringList drivers = QSqlDatabase::drivers();
-   qDebug() << drivers;
    QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
    db.setHostName("hci.c9od6skigiqx.us-west-2.rds.amazonaws.com");
    db.setPort(3306);
@@ -23,15 +24,23 @@ void Database::pickQuery(QString s) {
     }
 }
 
-bool Database::DOTHIS() {
-   if(!makeConnection())
-   {
-      qDebug()<<"fail";
-      return false;
-   }
-   else
-   {
-      qDebug()<<"pass";
-   }
-   return true;
+void Database::login(const QString& username, const QString& password) {
+   // do database stuff to check if the username and password are a valid combination
+   emit acceptLogin(true);
+}
+
+void Database::Emotions(const QList<EmotionRank*>& emo) {
+   // if the database accepts the information
+   emit acceptEmotions(true);
+}
+
+void Database::Typing(const KeyFeatures& feat) {
+   // if the database accepts the information
+   emit acceptTyping(true);
+}
+
+void Database::previousTyping() {
+   QList<KeyFeatures> a;
+   // find the previous tests relating to the user in the database
+   emit previousTypingResults(a);
 }

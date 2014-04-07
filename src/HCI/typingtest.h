@@ -24,9 +24,15 @@ class TypingTest : public QDialog {
    Typing *write;
    Analysis analysis;
 
+  signals:
+   void results(const KeyFeatures&);
+   void findPrevious();
+   
    public slots:
    void calculate(const QVector<int>&, const QVector<int>&,
 		  const QVector<int>&);
+   void acceptedInfo(bool);
+   void inputKeyFeatures(const QList<KeyFeatures>&);
 };
 
 #endif

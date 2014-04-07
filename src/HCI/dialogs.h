@@ -11,6 +11,8 @@
 #include "emotiontest.h"
 #include "typingtest.h"
 #include "login.h"
+#include "database.h"
+
 
 class Dialogs : public QWidget
 {
@@ -22,6 +24,7 @@ private:
     Login *login;
     EmotionTest *emTest;
     TypingTest *tyTest;
+    Database *data;
 };
 
 #endif 

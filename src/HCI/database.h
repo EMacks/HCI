@@ -9,11 +9,31 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QDebug>
+#include <QWidget>
 
-class Database {
+#include "emotionrank.h"
+#include "keyfeatures.h"
+
+class Database : public QWidget {
+   Q_OBJECT
   public:
+   Database(QWidget* parent=0);
    bool makeConnection();
    void pickQuery(QString s);
-   bool DOTHIS();
+
+  signals:
+   void acceptLogin(bool);
+   void acceptEmotions(bool);
+   void acceptTyping(bool);
+   void previousTypingResults(const QList<KeyFeatures>&);
+
+   public slots:
+   void login(const QString& username, const QString& password);
+   void Emotions(const QList<EmotionRank*>&);
+   void Typing(const KeyFeatures&);
+   void previousTyping();
+
+  private:
+   QString username, password;
 };
 #endif

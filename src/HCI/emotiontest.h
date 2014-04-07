@@ -29,7 +29,11 @@ public:
 public slots:
    void findChecked();
    void enableSubmit();
-private:
+   void acceptedInfo(bool);
+   
+  signals:
+   void results(const QList<EmotionRank*>&);
+  private:
    QList<EmotionRank*> emotions;
    QPushButton *submit;
    
