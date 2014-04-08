@@ -20,11 +20,11 @@ TypingTest::TypingTest(const QString& a, QWidget * parent) : QDialog(parent) {
   text->setWordWrap(true);
   write = new Typing(text->text(), 0);
   connect(write,SIGNAL(finished(const QVector<int>&,
-				const QVector<int>&,
-				const QVector<int>&)),
+				const QVector<long long>&,
+				const QVector<long long>&)),
 	  this, SLOT(calculate(const QVector<int>&,
-			       const QVector<int>&,
-			       const QVector<int>&))); 
+			       const QVector<long long>&,
+			       const QVector<long long>&))); 
   connect(this, SIGNAL(accepted()), this, SLOT(close()));
   QVBoxLayout *layout = new QVBoxLayout(this);
   layout->addWidget(explain);
@@ -35,10 +35,10 @@ TypingTest::TypingTest(const QString& a, QWidget * parent) : QDialog(parent) {
 }
 
 void TypingTest::calculate(const QVector<int> &key,
-			   const QVector<int> &press,
-			   const QVector<int> &release) {
+			   const QVector<long long> &press,
+			   const QVector<long long> &release) {
   emit findPrevious();
-  int latest = 0;   
+  int latest = analysis.dataSize();   
   analysis.addKeyFeature(key, press, release);
   if(analysis.isTired(latest)) {
     std::cerr << "you are apparently tired" << std::endl;

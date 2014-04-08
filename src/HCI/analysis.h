@@ -19,10 +19,10 @@ class Analysis {
    
    int addKeyFeature(KeyFeatures a);
    int addKeyFeature(const QVector<int> &k, 
-		     const QVector<int> &p,
-		     const QVector<int> &r);
+		     const QVector<long long> &p,
+		     const QVector<long long> &r);
    KeyFeatures results(const int &latest);
-
+   int dataSize() { return data.size();}
   private:
    void determine(const int &latest);
    qreal numMistakes;

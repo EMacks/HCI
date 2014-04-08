@@ -26,8 +26,8 @@ class TypingTest : public QDialog {
    
    
    public slots:
-   void calculate(const QVector<int>&, const QVector<int>&,
-		  const QVector<int>&);
+   void calculate(const QVector<int>&, const QVector<long long>&,
+		  const QVector<long long>&);
    void acceptedInfo(bool);
    void inputKeyFeatures(const QList<KeyFeatures>&);
 

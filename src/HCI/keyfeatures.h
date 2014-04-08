@@ -9,11 +9,12 @@
 
 #include <Qt>
 #include <QVector>
+#include <climits>
 
 struct Features{
   qreal mean, std;
   int min, max, size;
-  Features() {}
+  Features() {min = INT_MIN; max = INT_MAX;}
   Features(const int& mi, const int& ma) {
     min = mi;
     max = ma;
@@ -32,8 +33,8 @@ struct Features{
 class KeyFeatures {
    
  public:
-   KeyFeatures(const QVector<int>& k, const QVector<int>& p,
-	      const QVector<int>& r);
+   KeyFeatures(const QVector<int>& k, const QVector<long long>& p,
+	      const QVector<long long>& r);
   KeyFeatures(int numM, int diG_n, int triG_n, 
 	      int numE, Features dG_1D2D,
 	      Features dG_1Dur, Features dG_KeyLat, Features dG_2Dur,
@@ -43,8 +44,8 @@ class KeyFeatures {
 	      Features trG_Dur, Features trG_NumEvents);
   KeyFeatures() {}
   void calculate(const QVector<int>& key, 
-		 const QVector<int>& press, 
-		 const QVector<int>& release);
+		 const QVector<long long>& press, 
+		 const QVector<long long>& release);
   const Features& access_2G_1D2D() const { return diG_1D2D;}
   const Features& access_2G_1Dur() const { return diG_1Dur;}
   const Features& access_2G_KeyLat() const { return diG_KeyLat;}
@@ -61,6 +62,7 @@ class KeyFeatures {
   const Features& access_3G_Dur() const { return triG_Dur;}
   const Features& access_3G_NumEvents() const { return triG_NumEvents;}
   const int& access_numMistakes() const { return numMistakes; }
+  const int& access_numEvents() const { return numEvents; }
   const int& access_2G_num() const { return diG_num; }
   const int& access_3G_num() const { return triG_num; }
 
@@ -118,33 +120,33 @@ class KeyFeatures {
  private:
   int calcNumMistakes(const QVector<int>& key);
   void calcFeatures(QVector<int> a, Features&);
-  QVector<int>* calc_2G_1D2D(const QVector<int>& press);
-  QVector<int>* calc_2G_1Dur(const QVector<int>& press,
-				   const QVector<int>& release);
-  QVector<int>* calc_2G_KeyLat(const QVector<int>& press,
-				     const QVector<int>& release);
-  QVector<int>* calc_2G_2Dur(const QVector<int>& press,
-				   const QVector<int>& release);
-  QVector<int>* calc_2G_Dur(const QVector<int>& press,
-				  const QVector<int>& release);
-  QVector<int>* calc_2G_NumEvents(const QVector<int>& press,
-					const QVector<int>& release);
-  QVector<int>* calc_3G_1D2D(const QVector<int>& press);
-  QVector<int>* calc_3G_1Dur(const QVector<int>& press,
-				   const QVector<int>& release);
-  QVector<int>* calc_3G_1KeyLat(const QVector<int>& press,
-				      const QVector<int>& release);
-  QVector<int>* calc_3G_2D3D(const QVector<int>& press);
-  QVector<int>* calc_3G_2Dur(const QVector<int>& press,
-				   const QVector<int>& release);
-  QVector<int>* calc_3G_2KeyLat(const QVector<int>& press,
-				      const QVector<int>& release);
-  QVector<int>* calc_3G_3Dur(const QVector<int>& press,
-				   const QVector<int>& release);
-  QVector<int>* calc_3G_Dur(const QVector<int>& press,
-				  const QVector<int>& release);
-  QVector<int>* calc_3G_NumEvents(const QVector<int>& press,
-					const QVector<int>& release);
+  QVector<int>* calc_2G_1D2D(const QVector<long long>& press);
+  QVector<int>* calc_2G_1Dur(const QVector<long long>& press,
+				   const QVector<long long>& release);
+  QVector<int>* calc_2G_KeyLat(const QVector<long long>& press,
+				     const QVector<long long>& release);
+  QVector<int>* calc_2G_2Dur(const QVector<long long>& press,
+				   const QVector<long long>& release);
+  QVector<int>* calc_2G_Dur(const QVector<long long>& press,
+				  const QVector<long long>& release);
+  QVector<int>* calc_2G_NumEvents(const QVector<long long>& press,
+					const QVector<long long>& release);
+  QVector<int>* calc_3G_1D2D(const QVector<long long>& press);
+  QVector<int>* calc_3G_1Dur(const QVector<long long>& press,
+				   const QVector<long long>& release);
+  QVector<int>* calc_3G_1KeyLat(const QVector<long long>& press,
+				      const QVector<long long>& release);
+  QVector<int>* calc_3G_2D3D(const QVector<long long>& press);
+  QVector<int>* calc_3G_2Dur(const QVector<long long>& press,
+				   const QVector<long long>& release);
+  QVector<int>* calc_3G_2KeyLat(const QVector<long long>& press,
+				      const QVector<long long>& release);
+  QVector<int>* calc_3G_3Dur(const QVector<long long>& press,
+				   const QVector<long long>& release);
+  QVector<int>* calc_3G_Dur(const QVector<long long>& press,
+				  const QVector<long long>& release);
+  QVector<int>* calc_3G_NumEvents(const QVector<long long>& press,
+					const QVector<long long>& release);
    
   int numMistakes, diG_num, triG_num, numEvents;
   Features diG_1D2D, diG_1Dur, diG_KeyLat, diG_2Dur, diG_Dur,
