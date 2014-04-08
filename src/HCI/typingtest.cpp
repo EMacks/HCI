@@ -38,8 +38,7 @@ void TypingTest::calculate(const QVector<int> &key,
 			   const QVector<long long> &press,
 			   const QVector<long long> &release) {
   emit findPrevious();
-  int latest = analysis.dataSize();   
-  analysis.addKeyFeature(key, press, release);
+  int latest = analysis.addKeyFeature(key, press, release);
   if(analysis.isTired(latest)) {
     std::cerr << "you are apparently tired" << std::endl;
   } else {
