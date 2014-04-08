@@ -85,11 +85,46 @@ void Database::Typing(const KeyFeatures& feat) {
 }
 
 void Database::previousTyping() {
-   QList<KeyFeatures> a;
+   QList<KeyFeatures> prev;
    // find the previous tests relating to the user in the database
    QSqlQuery query;
-
-   emit previousTypingResults(a);
+   QString sql = QString("select min(diG_1D2D_min), max(diG_1D2D_max), min(diG_1Dur_min), max(diG_1Dur_max), min(diG_1KeyLat_min), max(diG_1KeyLat_max), min(diG_2Dur_min), max(diG_2Dur_max), min(diG_Dur_min), max(diG_Dur_max), min(diG_NumEvents_min), max(diG_NumEvents_max), min(triG_1D2D_min), max(triG_1D2D_max), min(triG_1Dur_min), max(triG_1Dur_max), min(triG_1KeyLat_min), max(triG_1KeyLat_max), min(triG_2D3D_min), max(triG_2D3D_max), min(triG_2Dur_min), max(triG_2Dur_max), min(triG_2KeyLat_min), max(triG_2KeyLat_max), min(triG_3Dur_min), max(triG_3Dur_max), min(triG_Dur_min), max(triG_Dur_max), min(triG_NumEvents_min), max(triG_NumEvents_max) from TypingTest TT, Test T where TT.ID = T.typingID and T.username = \'%1\'").arg(username);
+   query.exec(sql);
+   while(query.next()) {
+     KeyFeatures a;
+     a.set_2G_1D2D(Features(query.value(0).toInt(), 
+			    query.value(1).toInt()));
+     a.set_2G_1Dur(Features(query.value(2).toInt(),
+			    query.value(3).toInt()));
+     a.set_2G_KeyLat(Features(query.value(4).toInt(), 
+			       query.value(5).toInt()));
+     a.set_2G_2Dur(Features(query.value(6).toInt(),
+			    query.value(7).toInt()));
+     a.set_2G_Dur(Features(query.value(8).toInt(),
+			   query.value(9).toInt()));
+     a.set_2G_NumEvents(Features(query.value(10).toInt(),
+				 query.value(11).toInt()));
+     a.set_3G_1D2D(Features(query.value(12).toInt(),
+			    query.value(13).toInt()));
+     a.set_3G_1Dur(Features(query.value(14).toInt(),
+			    query.value(15).toInt()));
+     a.set_3G_1KeyLat(Features(query.value(16).toInt(), 
+			       query.value(17).toInt()));
+     a.set_3G_2D3D(Features(query.value(18).toInt(),
+			    query.value(19).toInt()));
+     a.set_3G_2Dur(Features(query.value(20).toInt(),
+			    query.value(21).toInt()));
+     a.set_3G_2KeyLat(Features(query.value(22).toInt(), 
+			       query.value(23).toInt()));
+     a.set_3G_3Dur(Features(query.value(24).toInt(),
+			    query.value(25).toInt()));
+     a.set_3G_Dur(Features(query.value(26).toInt(),
+			   query.value(27).toInt()));
+     a.set_3G_NumEvents(Features(query.value(28).toInt(),
+				 query.value(29).toInt()));
+     prev.append(a);
+   }
+   emit previousTypingResults(prev);
 }
 
 void Database::makeTest() {

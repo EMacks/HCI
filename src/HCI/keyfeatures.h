@@ -14,6 +14,12 @@ struct Features{
   qreal mean, std;
   int min, max, size;
   Features() {}
+  Features(const int& mi, const int& ma) {
+    min = mi;
+    max = ma;
+    mean = std = size = 0;
+  }
+
   Features(const Features &a) {
     mean = a.mean;
     std = a.std;
@@ -77,22 +83,6 @@ class KeyFeatures {
   void set_2G_num(const int &a) { diG_num = a; }
   void set_3G_num(const int &a) { triG_num = a; }
 
-  void set_2G_1D2D_min(const int &a) { diG_1D2D.min = a;}
-  void set_2G_1Dur_min(const int &a) { diG_1Dur.min = a;}
-  void set_2G_KeyLat_min(const int &a) { diG_KeyLat.min = a;}
-  void set_2G_2Dur_min(const int &a) { diG_2Dur.min = a;}
-  void set_2G_Dur_min(const int &a) { diG_Dur.min = a;}
-  void set_2G_NumEvents_min(const int &a) { diG_NumEvents.min = a;}
-  void set_3G_1D2D_min(const int &a) { triG_1D2D.min = a;}
-  void set_3G_1Dur_min(const int &a) { triG_1Dur.min = a;}
-  void set_3G_1KeyLat_min(const int &a) { triG_1KeyLat.min = a;}
-  void set_3G_2D3D_min(const int &a) { triG_2D3D.min = a;}
-  void set_3G_2Dur_min(const int &a) { triG_2Dur.min = a;}
-  void set_3G_2KeyLat_min(const int &a) {triG_2KeyLat.min = a;}
-  void set_3G_3Dur_min(const int &a) { triG_3Dur.min = a;}
-  void set_3G_Dur_min(const int &a) { triG_Dur.min = a;}
-  void set_3G_NumEvents_min(const int &a) { triG_NumEvents.min = a;}
-   
   void set_2G_1D2D_max(const int &a) { diG_1D2D.max = a;}
   void set_2G_1Dur_max(const int &a) { diG_1Dur.max = a;}
   void set_2G_KeyLat_max(const int &a) { diG_KeyLat.max = a;}
@@ -108,7 +98,23 @@ class KeyFeatures {
   void set_3G_3Dur_max(const int &a) { triG_3Dur.max = a;}
   void set_3G_Dur_max(const int &a) { triG_Dur.max = a;}
   void set_3G_NumEvents_max(const int &a) { triG_NumEvents.max = a;}
-      
+  
+  void set_2G_1D2D_min(const int &a) { diG_1D2D.min = a;}
+  void set_2G_1Dur_min(const int &a) { diG_1Dur.min = a;}
+  void set_2G_KeyLat_min(const int &a) { diG_KeyLat.min = a;}
+  void set_2G_2Dur_min(const int &a) { diG_2Dur.min = a;}
+  void set_2G_Dur_min(const int &a) { diG_Dur.min = a;}
+  void set_2G_NumEvents_min(const int &a) { diG_NumEvents.min = a;}
+  void set_3G_1D2D_min(const int &a) { triG_1D2D.min = a;}
+  void set_3G_1Dur_min(const int &a) { triG_1Dur.min = a;}
+  void set_3G_1KeyLat_min(const int &a) { triG_1KeyLat.min = a;}
+  void set_3G_2D3D_min(const int &a) { triG_2D3D.min = a;}
+  void set_3G_2Dur_min(const int &a) { triG_2Dur.min = a;}
+  void set_3G_2KeyLat_min(const int &a) {triG_2KeyLat.min = a;}
+  void set_3G_3Dur_min(const int &a) { triG_3Dur.min = a;}
+  void set_3G_Dur_min(const int &a) { triG_Dur.min = a;}
+  void set_3G_NumEvents_min(const int &a) { triG_NumEvents.min = a;}
+  
  private:
   int calcNumMistakes(const QVector<int>& key);
   void calcFeatures(QVector<int> a, Features&);
