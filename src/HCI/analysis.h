@@ -25,7 +25,6 @@ class Analysis {
    int dataSize() { return data.size();}
   private:
    void determine(const int &latest);
-   qreal numMistakes;
    QVector<KeyFeatures> data;
    KeyFeatures *result;
 };
