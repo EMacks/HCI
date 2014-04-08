@@ -138,7 +138,7 @@ int KeyFeatures::calcNumMistakes(const QVector<int>& key) {
 QVector<int>* KeyFeatures::calc_2G_1D2D(const QVector<long long>& press) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 1; i++) {
-     (*a).push_back((int)(press[i + 1] - press[i]));
+     (*a).push_back(press[i + 1] - press[i]);
    }
    return a;
 }
@@ -148,7 +148,7 @@ QVector<int>* KeyFeatures::calc_2G_1Dur(const QVector<long long>& press,
 					      release) {
   QVector<int> *a = new QVector<int>();
   for(int i = 0; i < (int)press.size() - 1; i++) {
-     (*a).push_back((int)(release[i] - press[i]));
+     (*a).push_back(release[i] - press[i]);
    }
    return a;
 }
@@ -158,7 +158,7 @@ QVector<int>* KeyFeatures::calc_2G_KeyLat(const QVector<long long>& press,
 						release) {
   QVector<int> *a = new QVector<int>();
   for(int i = 0; i < (int)press.size() - 1; i++) {
-    (*a).push_back((int)(press[i+1] - release[i]));
+    (*a).push_back(press[i+1] - release[i]);
   }
   return a;
 }
@@ -168,7 +168,7 @@ QVector<int>* KeyFeatures::calc_2G_2Dur(const QVector<long long>& press,
 					      release) {
   QVector<int> *a = new QVector<int>();
   for(int i = 0; i < (int)press.size() - 1; i++) {
-    (*a).push_back((int)(release[i + 1] - press[i + 1]));
+    (*a).push_back(release[i + 1] - press[i + 1]);
   }
   return a;
 }
@@ -178,7 +178,7 @@ QVector<int>* KeyFeatures::calc_2G_2Dur(const QVector<long long>& press,
 					      release) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 1; i++) {
-     (*a).push_back((int)(release[i + 1] - press[i]));
+     (*a).push_back(release[i + 1] - press[i]);
    }
    return a;
 }
@@ -216,7 +216,7 @@ QVector<int>* KeyFeatures::calc_3G_1D2D(const QVector<long long>& press)
 {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 2; i++) {
-     (*a).push_back((int)(press[i + 1] - press[i]));
+     (*a).push_back(press[i + 1] - press[i]);
    }
    return a;
 }
@@ -226,7 +226,7 @@ QVector<int>* KeyFeatures::calc_3G_1Dur(const QVector<long long>& press,
 					      release) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < press.size() - 2; i++) {
-     (*a).push_back((int)(release[i] - press[i]));
+     (*a).push_back(release[i] - press[i]);
    }
    return a;
 }
@@ -235,7 +235,7 @@ QVector<int>* KeyFeatures::calc_3G_1KeyLat(const QVector<long long>& press,
 					   const QVector<long long>& release) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 2; i++) {
-     (*a).push_back((int)(press[i + 1] - release[i]));
+     (*a).push_back(press[i + 1] - release[i]);
    }
    return a;
 }
@@ -243,7 +243,7 @@ QVector<int>* KeyFeatures::calc_3G_1KeyLat(const QVector<long long>& press,
  QVector<int>* KeyFeatures::calc_3G_2D3D(const QVector<long long>& press) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 2; i++) {
-     (*a).push_back((int)(press[i + 1] - press[i]));
+     (*a).push_back(press[i + 1] - press[i]);
    }
    return a;
  }
@@ -253,7 +253,7 @@ QVector<int>* KeyFeatures::calc_3G_2Dur(const QVector<long long>& press,
 					      release) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 2; i++) {
-     (*a).push_back((int)(release[i + 1] - press[i + 1]));
+     (*a).push_back(release[i + 1] - press[i + 1]);
    }
    return a;
 }
@@ -264,7 +264,7 @@ QVector<int>* KeyFeatures::calc_3G_2KeyLat(const QVector<long long>&
 						 release) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 2; i++) {
-     (*a).push_back((int)(press[i + 2] - release[i+1]));
+     (*a).push_back(press[i + 2] - release[i+1]);
    }
    return a;
 }
@@ -274,7 +274,7 @@ QVector<int>* KeyFeatures::calc_3G_2KeyLat(const QVector<long long>&
 					       release) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 2; i++) {
-     (*a).push_back((int)(release[i + 2] - press[i + 2]));
+     (*a).push_back(release[i + 2] - press[i + 2]);
    }
    return a;
 }
@@ -284,7 +284,7 @@ QVector<int>* KeyFeatures::calc_3G_Dur(const QVector<long long>& press,
 					     release) {
    QVector<int> *a = new QVector<int>();
    for(int i = 0; i < (int)press.size() - 2; i++) {
-     (*a).push_back((int)(release[i + 2] - press[i]));
+     (*a).push_back(release[i + 2] - press[i]);
    }
    return a;
 }

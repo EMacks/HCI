@@ -60,7 +60,7 @@ Dialogs::Dialogs(QWidget *parent) : QWidget(parent)
       // if test results are put into the database then closes dialog
       connect(data, SIGNAL(acceptTyping(bool)), tyTest,
 	      SLOT(acceptedInfo(bool)));
-      // closes everything
+      // forces the Test table to be initialized
       connect(tyTest, SIGNAL(accepted()), data, SLOT(makeTest()));
 
       login->exec();
