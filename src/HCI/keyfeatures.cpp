@@ -60,7 +60,7 @@ void KeyFeatures::calculate(const QVector<int>& key,
 			    const QVector<long long>& press,
 			    const QVector<long long>& release) 
 {
-  numEvents = press.size() + release.size();
+  numEvents = (int)press.size() + (int)release.size();
   
   QVector<int>* a = calc_2G_1D2D(press);
   calcFeatures(*a, diG_1D2D);
