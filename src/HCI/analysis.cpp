@@ -123,59 +123,9 @@ int Analysis::addKeyFeature(const QVector<int> &k,
   }
   
   a.calculate(k,p,r);
-  cerr << a.access_2G_1D2D().min << " " << a.access_2G_1D2D().max << " "
-       << a.access_2G_1D2D().std << " " << a.access_2G_1D2D().mean 
-       << endl;
-  
-  cerr << a.access_2G_1Dur().min << " "  << a.access_2G_1Dur().max  << " "
-       << a.access_2G_1Dur().std << " "  << a.access_2G_1Dur().mean << endl;
-  
-  cerr << a.access_2G_KeyLat().min << " " << a.access_2G_KeyLat().max  << " "
-       << a.access_2G_KeyLat().std << " " << a.access_2G_KeyLat().mean << endl;
-    
-  cerr << a.access_2G_2Dur().min << " " <<  a.access_2G_2Dur().max << " "
-       << a.access_2G_2Dur().std << " " <<  a.access_2G_2Dur().mean << endl;
-    
-  cerr << a.access_2G_Dur().min << " " << a.access_2G_Dur().max << " "
-       << a.access_2G_Dur().std << " " << a.access_2G_Dur().mean << endl;
-    
-  cerr << a.access_2G_NumEvents().min << " " << a.access_2G_NumEvents().max 
-       << " " << a.access_2G_NumEvents().std << " " 
-       << a.access_2G_NumEvents().mean << endl;
-
-  cerr << a.access_3G_1D2D().min << " " << a.access_3G_1D2D().max  << " "
-       << a.access_3G_1D2D().std << " " << a.access_3G_1D2D().mean
-       << endl;
-
-  cerr << a.access_3G_1Dur().min << " " << a.access_3G_1Dur().max  << " "
-       << a.access_3G_1Dur().std << " " << a.access_3G_1Dur().mean << endl;
-
-  cerr << a.access_3G_1KeyLat().min << " " << a.access_3G_1KeyLat().max << " "
-       << a.access_3G_1KeyLat().std << " " << a.access_3G_1KeyLat().mean
-       << endl;
-
-  cerr << a.access_3G_2D3D().min << " " << a.access_3G_2D3D().max << " "
-       << a.access_3G_2D3D().std << " " << a.access_3G_2D3D().mean << endl;
-
-  cerr << a.access_3G_2Dur().min << " " << a.access_3G_2Dur().max << " "
-       << a.access_3G_2Dur().std << " " << a.access_3G_2Dur().mean << endl;
-    
-  cerr << a.access_3G_2KeyLat().min << " " << a.access_3G_2KeyLat().max << " "
-       << a.access_3G_2KeyLat().std << " " << a.access_3G_2KeyLat().mean
-       << endl;
-
-  cerr <<  a.access_3G_3Dur().min << " " << a.access_3G_3Dur().max << " "
-       <<  a.access_3G_3Dur().std << " " << a.access_3G_3Dur().mean << endl;
-
-  cerr << a.access_3G_Dur().min << " " << a.access_3G_Dur().max << " "
-       << a.access_3G_Dur().std << " " << a.access_3G_Dur().mean << endl;
-    
-  cerr << a.access_3G_NumEvents().min << " " << a.access_3G_NumEvents().max 
-       << " " << a.access_3G_NumEvents().std << " " 
-       << a.access_3G_NumEvents().mean << endl;
-
+  std::cout << "a: " << a.access_numEvents() << std::endl;
   data.push_back(a); 
-
+  std::cout << "data: " << data[data.size()-1].access_numEvents() << std::endl;
   return data.size() - 1; 
 }
 
@@ -258,7 +208,7 @@ void Analysis::determine(const int &latest) {
   (*result).set_3G_Dur(data[latest].access_3G_Dur());
   (*result).set_3G_NumEvents(data[latest].access_3G_NumEvents());
   (*result).set_numMistakes(data[latest].access_numMistakes());
-  
+  (*result).set_numEvents(data[latest].access_numEvents());
 }
 
 

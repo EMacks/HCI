@@ -80,7 +80,8 @@ class KeyFeatures {
   void set_3G_2KeyLat(const Features &a) {triG_2KeyLat = a;}
   void set_3G_3Dur(const Features &a) { triG_3Dur = a;}
   void set_3G_Dur(const Features &a) { triG_Dur = a;}
-  void set_3G_NumEvents(const Features &a) { triG_NumEvents = a;}
+  void set_3G_NumEvents(const Features &a) { triG_NumEvents = a;}  
+  void set_numEvents(const int &a) { numEvents = a;}
   void set_numMistakes(const int &a) { numMistakes = a; }
   void set_2G_num(const int &a) { diG_num = a; }
   void set_3G_num(const int &a) { triG_num = a; }

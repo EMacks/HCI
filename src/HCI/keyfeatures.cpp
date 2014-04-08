@@ -5,6 +5,7 @@
 // Implementation file for KeyFeatures
 //*****************************************************************************
 #include "keyfeatures.h"
+#include <iostream>
 #include <cmath>
 #include <cstdlib>
 #include <algorithm>
@@ -61,6 +62,7 @@ void KeyFeatures::calculate(const QVector<int>& key,
 			    const QVector<long long>& release) 
 {
   numEvents = (int)press.size() + (int)release.size();
+  std::cout << numEvents << std::endl;
   
   QVector<int>* a = calc_2G_1D2D(press);
   calcFeatures(*a, diG_1D2D);
