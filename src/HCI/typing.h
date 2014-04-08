@@ -22,7 +22,7 @@ class Typing : public QTextEdit {
    virtual void keyReleaseEvent(QKeyEvent * event);
 
   signals:
-   void finished(const QVector<int>&, const QVector<int>&, const QVector<int>&);
+   void finished(const QVector<int>&, const QVector<long long>&, const QVector<long long>&);
 
  protected:
    virtual void mousePressEvent(QMouseEvent*) {}
@@ -35,8 +35,8 @@ class Typing : public QTextEdit {
    QTime *time;
    int atChar;
    QVector<int> key;
-   QVector<int> press;
-   QVector<int> release;
+   QVector<long long> press;
+   QVector<long long> release;
 };
 
 #endif
