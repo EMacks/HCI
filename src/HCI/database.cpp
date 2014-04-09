@@ -5,6 +5,7 @@
 // implementation file for Database
 //*****************************************************************************
 #include "database.h"
+#include "password.h"
 #include <iostream>
 
 Database::Database(QWidget* parent) : QWidget(parent) {}
@@ -16,7 +17,7 @@ bool Database::makeConnection() {
    db.setPort(3306);
    db.setDatabaseName("HCI");
    db.setUserName("sqluser");
-   db.setPassword("12curLING*$");
+   db.setPassword(PASSWORD);
     
    return db.open();
 }
