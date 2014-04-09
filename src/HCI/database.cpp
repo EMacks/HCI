@@ -5,18 +5,18 @@
 // implementation file for Database
 //*****************************************************************************
 #include "database.h"
-#include "password.h"
+#include "info.h"
 #include <iostream>
 
 Database::Database(QWidget* parent) : QWidget(parent) {}
 
 bool Database::makeConnection() {
    QStringList drivers = QSqlDatabase::drivers();
-   QSqlDatabase db=QSqlDatabase::addDatabase("QMYSQL");
-   db.setHostName("hci.c9od6skigiqx.us-west-2.rds.amazonaws.com");
-   db.setPort(3306);
-   db.setDatabaseName("HCI");
-   db.setUserName("sqluser");
+   QSqlDatabase db=QSqlDatabase::addDatabase(DATABASE);
+   db.setHostName(HOST_NAME);
+   db.setPort(PORT);
+   db.setDatabaseName(DATABASE_NAME);
+   db.setUserName(USERNAME);
    db.setPassword(PASSWORD);
     
    return db.open();
