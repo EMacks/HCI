@@ -53,18 +53,16 @@ void Typing::keyPressEvent(QKeyEvent * event) {
       && textBackgroundColor() != Qt::red) {
       atChar--;
    } else if(check.contains(key[key.size()-1])
-	     && check[key[key.size()-1]] != toMatch[atChar]) {
-      setTextBackgroundColor(Qt::red);
-   } else if(check.contains(key[key.size()-1])){
+	     && check[key[key.size()-1]] == toMatch[atChar]){
       setTextBackgroundColor(Qt::transparent);
       atChar++;
    } else {
       setTextBackgroundColor(Qt::red);
    }
-   QTextEdit::keyPressEvent(event);
-
-   
-
+   QKeyEvent *a = new QKeyEvent(QEvent::KeyPress, event->key(), Qt::NoModifier,
+				event->text().toLower(), event->isAutoRepeat(),
+				event->count());
+   QTextEdit::keyPressEvent(a);
 }
 
 void Typing::keyReleaseEvent(QKeyEvent * event) {
