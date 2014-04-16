@@ -2,7 +2,7 @@
 // CPSC 3770 Human Computer Interaction
 // Prof: Kevin Grant
 // by: Erin Mackey and Camara Lerner
-// Main file which is awesome
+// Main file
 //*****************************************************************************
 #include "dialogs.h"
 #include <QApplication>
